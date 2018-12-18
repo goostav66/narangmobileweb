@@ -1,0 +1,470 @@
+/* 공통 */
+body{ margin: 0; top: 0px !important; font-family: 'Nanum Gothic';}
+.wrap{ width: 100vmin;/*  height: 100vmax;  */background-repeat: no-repeat; background-size: cover; background-position: center; margin: auto; }	
+nav{ width: 100vmin; height: 35px; padding: 1% 0; background-color: #45A737; display: flex; align-self: center; align-items: center; }
+
+::-webkit-scrollbar { display: none; }
+.icon_home{ height: 30px; margin-left: 5px; }
+.icon_sideNav, .icon_login{ height: 40px; margin-right: 5px;  }
+.nav_title{ font-family: '스냅스 쾌남열차'; font-size: 2rem; color: #fff; flex: 1; text-align: center; }
+
+form{ margin: 0;}
+a{ text-decoration: none; color: #000; }
+a:visited { color: #000; }
+button{ font-family: 'Nanum Gothic'; }
+input, textarea{ border: 1px solid #45A737; background-color: #fff; outline: none; }
+
+.right{ float: right; }
+.old{ display: none; }
+.invisible{ visibility: hidden; }
+
+.dialog_share{ position: fixed; display: none; width: 80vmin; height: 40vmin; top: 40%; left: 10vmin; background-color: #fff; z-index: 3; }
+.dialog_title { margin: 1vmin; }
+.dialog_close{ margin: 1vmin; float: right; }
+.dialog_close img{ width: 5vmin; }
+.dialog_share_icon{ clear: both; margin: 4vmin 0; }
+.dialog_share_icon>div{ display:inline-block; margin: 1vmin 2.5vmin; line-height: 2}
+.dialog_share_icon>div img{ width: 15vmin; }
+.dialog_share_icon>div span{ font-size: 0.9rem; }
+.dialog_background, .sideNav_background{ position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; background-color: rgba(0,0,0,0.5); display: none; }
+
+/* 메인화면 */
+.pre{ background-repeat: no-repeat; background-position: center; background-size: contain; margin: 0; width: 100vmin; height: 100vmax; position: fixed; top: 0; left: 0; }
+
+.header_logo { text-align: center; margin: 4vmin 0; display: flex; align-items: center; }
+.header_logo img { height: 2rem; padding-left : 4vmin; } 
+.header_logo span { font-family: '스냅스 쾌남열차'; font-size: 1.5rem; flex: 1; }
+
+.main_photo { position: relative; width: 100vmin; height: 65vmin; }
+.photo_panel { width: 98vmin; height: 65vmin; position: absolute; margin-left: 1vmin; background-size: 100% 100%; border-radius: 8px; display: flex; align-items: center; justify-content: center;}
+
+.photo_control{ position: absolute; right: 10vmin; bottom: 2vmin; }
+.photo_control img { width: 5vmin; }
+#control_start { display: none;}
+
+.main_menu_panel{ margin: 4vmin 0; }
+.menu_1st, .menu_2nd{ border-top: 1px solid #eee; overflow: auto; }
+.menu_2nd{ border-bottom: 1px solid #eee; }
+.menu_1st>div, .menu_2nd>div{ box-sizing: border-box; width: 25vmin; float: left; border-right: 1px solid #eee;}
+.menu_1st>div:last-child, .menu_2nd>div:last-child{ border-right: none; }
+.menu_1st img, .menu_2nd img { width: 17vmin; padding: 2vmin 3vmin }
+
+.main_banner>div{ width: 100vmin; margin: 1vmin 0 4vmin 0; }
+.main_banner>div img{ width: 100%; height: 90px; display:none; }
+
+.main_promotion_slide{ padding: 1vmin 0; font-family: "스냅스 쾌남열차"; font-size: 1.2rem; overflow-x: hidden; }
+.marquee_shop_name{ margin: 0 2vmin 0 10vmin; color: #45A737; }
+.marquee_sale_rate{ color: #2771d0;}
+.marquee_shop_intro{ margin: 0 2vmin 0 10vmin; }
+.js-marquee::after{ margin-bottom: 4vmin; }
+
+.banner_hr{ overflow: auto; white-space: nowrap; margin: 4vmin 0; }
+.banner_hr_layout{ display: inline-block; }
+.banner_hr_layout>div{ width: 90vmin; margin: 1vmin 0; text-align: left; }
+.banner_hr_layout:first-child{ margin-left: 5vmin; }
+.banner_hr_layout:last-child{ margin-right: 5vmin; }
+.banner_main img{ width: 90vmin; border-radius: 8px; }
+.banner_h1{ font-size: 1.3rem; font-weight: bolder; line-height: 1.5}
+.banner_h2{ font-size: 1.1rem;}
+
+.banner{ margin: 4vmin 0; }
+.banner>div{ position: relative; overflow: auto;}
+.banner img{ width: 94vmin; height: 65vmin; border-radius: 8px; margin-bottom: 2vw; }
+
+.banner_title { position: absolute; top: 20px; left: 20px; color: #fff; font-family: '스냅스 쾌남열차';  font-weight: bolder; font-size: 1.3rem; text-shadow: 0 0 5px #000; }
+.banner_text { position: absolute; bottom: 20px; left: 20px; color: #fff; font-family: '스냅스 쾌남열차'; font-size: 1.1rem; text-shadow: 0 0 5px #000;}
+
+<!-- 메인화면 -->{}
+.languages { margin-left: 5px }
+.languages img{ width: 10vmin; margin: 5px 2px; }
+#flag_k{ display: none; }
+.menu_panel{ width: 100%; margin-top: 15%; margin-bottom: 5%;}
+.menu_icon{ display: inline-block; }
+.menu_icon img{ width: 15vmin; margin: 1% 0; padding: 1% 1vw; }
+.menu_txt{ width: 21vmin !important; height: 1.2rem; margin: 1% 0; padding: 1% 2vw; }
+.popup{ position:fixed; top:25%; left: 10vmin; width:80vmin; height:80vmin; z-index: 99; }
+.popup>img{ width: 80vmin; height: 80vmin; }
+
+#drive_pop{	top:50%; left:120%; }
+
+.nn_bubble	{ background-color: rgba(255,255,255,1); display :none; padding :3vmin; position:absolute;  margin-top: -90px;  border-radius: 5%; width:25vw; }
+.nn_bubble:after { content: ''; position: absolute; left: 0; top: 60%; width: 0; height: 0; border: 20px solid transparent; border-right-color: #fff; border-left: 0; border-bottom: 0; margin-top: -10px; margin-left: -20px }	
+.nn_bubble a	{ display:block; margin: 1vh; padding: 1vh 2vw; font-family: "스냅스 쾌남열차"; font-size: 1rem; height: 25px; border-radius: 7px; background-color: #38b798; color: #fff; cursor:pointer; line-height: 25px; text-align: center;}.nn_bubble a:hover	{background-color: #369b82; color:#fff}
+.nn_bubble a:visited, .nn_bubble a:active { color:#fff }
+
+.popup_main,.popup_sale, .pre_div { position:absolute; display: none; left: 25%; top: 12%; width:90vmin; height:80vmin; text-align: center; font-size:1.2rem; font-weight: 700;  align-items: center; justify-content: center; word-break: break-all; z-index: 2; }	
+.popup_main span, .pre_div span{ width: 88vmin;}
+.popup_main img{ max-width: 70vmin; max-height: 70vmin; }
+
+.scrollBanner { position: relative; margin: auto; width: fit-content }
+.scrollBanner img { width: 100vmin; height: 15vmax; display:none; z-index: -1 }
+.bannerDot { position:absolute; bottom: 1px; right: 1px; }
+.dot { width: 3vmin; height: 3vmin; border-radius: 50%; background-color: #eee; float:left; margin-right: 2px; }
+
+/* 통합 이벤트 페이지(테스트) */
+.event_title, .discount_title{ text-align: center; margin: 3vmin; font-family: '스냅스 쾌남열차'; font-size: 1.8rem; }
+.event_title span, .discount_title span{ padding-bottom: 0.5vmin; border-bottom: 1px solid #000; }
+.event_list, .discount_list{ width: 100vw; overflow: auto; display: inline-block; white-space: nowrap; margin-bottom: 4vmin; }
+.layout_event, .layout_discount{ display: inherit; background-color: #fff; margin-right: 5vmin; border-radius: 5px; }
+.layout_event:first-child, .layout_discount:first-child{ margin-left: 10vmin; }
+.layout_event:last-child, .layout_discount:last-child{ margin-right: 10vmin; }
+.shop_photo{ width: 80vmin; }
+.shop_photo img{ width: 74vmin; height: 49vmin; margin: 3vmin; }
+.shop_name{ width: 74vmin; margin: auto; }
+.shop_msg{ width: 74vmin; margin: 3vmin auto; overflow: hidden; }
+
+.event_btn img, .discount_btn img{ width: 19vmin; margin: 0 1vmin;}
+.share_pop{ float: right; }
+
+/* 진행중 이벤트, 번개할인 */
+.promotion{ height: 100vh; overflow: auto; background-color: rgba(69, 167, 55, 0.7);}
+.promotion h2{ margin-left: 5vmin; width: fit-content; border-bottom: 1px solid #000; padding-bottom: 1vmin; font-weight: normal; font-family: '스냅스 쾌남열차'}
+.promotion_event, .promotion_discount{ display: flex; flex-flow: row nowrap; margin-top: 5vmin;  }
+.layout_p_event, .layout_p_discount{ display: flex; flex-flow: column; width: 70vmin; height: 65vmin; margin-left: 10vmin; background-color: #fff; }
+
+.event_message, .discount_photo{ display: flex; align-items: center; justify-content: center; text-align: center; width: 70vmin; height: 45vmin; background-size: 100% 100%; }
+.event_shop{ font-size: 1.1rem; margin: 2vmin 0 0 3vmin; }
+.discount_shop{ font-size: 1.1rem; margin: 2vmin 0 0 3vmin; }
+.event_date, .discount_menu{ font-size: 0.9rem; margin: 1vmin 0 1vmin 3vmin; }
+
+
+.set_popup, .set_discount{ clear: both; overflow: -webkit-paged-y; border-bottom: 1px solid #eee; padding: 1vmin; width: 100vmin; background-color: #fff; box-sizing: border-box; }
+.set_popup:last-child,
+.set_discount:last-child{ border-bottom: none; }
+.set_popup_left, .set_popup_right,
+.set_discount_left, .set_discount_right{ float: left; }
+.set_popup_left, .set_popup_left img,
+.set_discount_left, .set_discount_left img{ width: 35vmin; height: 35vmin; }
+
+.set_popup_right, .set_discount_right{ width: 62vmin; height: 35vmin; margin-left: 1vmin; position:relative; font-family: 'Nanum Gothic'}
+.set_popup_right>div,
+.set_discount_right>div{ font-size: 1.1rem; margin: 1.5vmin 0;}
+
+.set_popup .shop_name,
+.set_discount .shop_name{ font-weight: bold; font-size: 1.2rem; white-space: nowrap; }
+
+.discount_rate, .popup_date{ float: left; }
+.popup_pre_message{ display: none; }
+
+.popup_share, .discount_share{ float: right; }
+.popup_share .share_icon, .discount_share .share_icon { width: 13vmin; }
+
+/* 전자메뉴판(업소정보) 헤더 */
+.franch_header_labels{ display: flex; }
+.label{ flex:1; text-align: center; font-size: 1.5rem; padding: 1vmax 0; border-top: 5px solid #45A737; border-bottom: 1px solid #45A737; border-right: 0.5px solid #AAA; font-family: '스냅스 쾌남열차'; }	
+.label:last-child{ border-right: none; }
+
+.table_franch_infor{ margin: auto; font-size: 1rem; }
+.table_franch_infor th{padding: 1%; text-align: left; width: 30%;}
+.table_franch_infor td{padding: 1%;}
+.table_franch_extra{ margin: auto; font-size: 0.8rem;}
+.table_franch_extra td{ text-align: center; width: 17vmin }
+.table_franch_extra td img{ width: 8vmin; }
+
+.layer_map{	width: 100vmin; position: relative; }
+.slide, #map{ width: 100vmin; height: 62vmin; background-size: 100% 100% !important; background-repeat: no-repeat; }
+
+.layer_icon{ position: absolute; top: 0; right: 1%; z-index: 2;}
+.layer_icon img{ width: 10vmin; height: 10vmin; }
+.layer_navi{ position: absolute; top: 11vmin; right: 1%; z-index: 2; }
+.layer_navi img{ width: 10vmin; }
+
+.franch_infor{ position:relative; }
+.layout_sale{ position: absolute; top: 0; background-color: #000; color: #fff; opacity: 0.8; width: 98vmin; height:98vmin; margin: 1vmin; padding-top: 10%;}
+.layout_sale_txt>div{ overflow: auto; font-size: 1.5rem; font-weight: bolder; margin: 1vmax 0; padding: 1vmin;}
+
+.sale_column{ box-sizing: border-box; float:left; width: 30vmin; }
+.sale_record{ box-sizing: border-box; float:right; width: 65vmin; text-align: left; }
+.sale_record input{ font-size: 1.1rem; }
+.sale_record input[type='date']{ width: 50vmin; } 
+.sale_record input[type='time']{ width: 31vmin; }
+.sale_record input[type='text']{ padding: 1vmin; }
+.sale_record input[type='number']{ width: 20vmin; }
+
+/* 전자메뉴판 메뉴*/
+.layout_menu{ overflow: auto; display: flex; border-bottom: 1px solid #eee; }
+.layout_menu:last-child{ border-bottom: none; }
+
+.menu_photo{ flex: 3; }
+.menu_photo>div{ width: 30vmin; height: 30vmin; background-size: cover; background-position: center; }
+.menu_txt{ flex: 5; }
+.menu_price{ flex: 2.5; font-size: 0.8rem; color: #45A737; align-self: flex-end; }
+
+.menu_photo img{ width: 30vmin; height: 30vmin; }
+.menu_price>div{ margin-bottom: 1vmin; }
+.menu_name{ font-weight: bolder; word-break: break-all; }
+.menu_infor{ font-size: 0.8rem; }
+.menu_price{ text-align: right; }
+
+.dialog_menu_detail{ position: fixed; display: none; top: 25%; left: 25%; z-index: 3; width: 90vmin; }
+#menu_detail_name{ background-color: #fff; font-size: 1.2rem; }
+#menu_detail_img{ width: 90vmin; height: 90vmin; background-repeat: no-repeat; background-size: 90vmin; }
+.dialog_menu_detail>img{ width: 90vmin; }
+
+/* 신규 가맹점 리스트(테스트) */
+.shop_type{ display: flex; flex-flow: row wrap; width: 100vmin; }
+.shop_type>div{ flex: 1; }
+.shop_type>div{ border-top: 0.5px solid #aaa; border-bottom: 0.5px solid #aaa; }
+.shop_type img{ box-sizing: border-box; width: 20vmin; border-right: 0.5px solid #aaa; }
+
+
+/* 예약서비스(가맹점 리스트) 헤더 */
+.btn_goto_set_discount{ width: 80vmin; font-size: 1.3rem; margin: 2vmin 0; padding: 2vmin 0; background-color: #fff; color: #45A737; border: 1px solid #45A737; border-radius: 5px; font-family: '스냅스 쾌남열차'; }
+.btn_goto_set_discount:hover{ background-color: #45A737; color: #fff;}
+#text_search_reserve{ font-size: 1.1rem; padding: 1vmin; margin: 2vmin 1vmin 5vmin 1vmin; width: 98vmin; }
+
+.layer_tabs{ overflow: auto; white-space: nowrap; overflow-y: hidden; width: 100vmin; position:relative; display: inline-block;}
+#tabs_left, #tabs_right{ position: absolute; top:0; width: 5vmin; height: 100%; display:inline-block; } 
+#tabs_left{ left: 0; background: linear-gradient(to left, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.9)); }
+#tabs_right { right: 0; background: linear-gradient(to right, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.9))}
+.tabs{ padding: 2vmin 0; margin: 0 3vmin; font-size: 1.1rem; font-weight: bolder; display: inline-block; }
+.tabs:first-child{ color: #5BC51A; border-bottom: 2px solid #5BC51A; }
+
+#btn_more{ margin: 2vmin 0; width: 75vmin; padding: 1vmin 0; color: #45A737; background-color: #fff; border: 1px solid #45A737; border-radius: 5px; }		
+
+<!-- 가맹점 리스트 -->{}
+.layout_franch{ clear: both; padding: 1vmin; width: 100vmin; border-bottom: 1px solid #eee; overflow: auto; box-sizing: border-box; display: flex; }
+.layout_franch_left{ flex: 0.3; align-self: center;  }
+.layout_franch_right{ flex: 0.7; margin-left: 1vmin; }
+.layout_franch_left img{ width: 30vmin; height: 30vmin; }
+.layout_franch_right>div{ margin: 1vmin 0; overflow: auto; }
+
+.layout_franch .shop_name{ font-weight: bold; font-size: 1.1rem; }
+.franch_distance{ font-size: 0.7rem; }
+
+.franch_addr_h, .franch_bh_h{ color: #aaa; float:left; }
+.franch_addr_d, .franch_bh_d{ word-break: break-all; }
+
+.franch_ex_infor{ display: flex; }
+.franch_ex_infor>div{ margin: 1vmin 0; flex:1 }
+.franch_ex_infor>div img{ height: 6vmin; padding: 1vmin 0; }
+.franch_ex_infor>div span{ font-size: 0.7rem; word-break: normal; }
+
+<!-- 손님 이야기 -->{}
+.guest_img{ width: 100vmin; display: block; margin-left: auto; margin-right: auto; }
+.layer_emoticon{ overflow: auto; margin-bottom: 2vmin; }
+.layer_emoticon input[type='radio']{ display: none; }
+.layer_emoticon input[type='radio']:checked+img{ background-color: #45A737; }
+.emoticon{ width: 25vmin; float: left }
+#ta_comment{ width: 95vmin; padding: 12px 20px; box-sizing: border-box; border: 2px solid #45A737; border-radius: 4px; font-size: 1.2rem; margin: 0 1vmin 1vmin 1vmin;  }
+#filebutton{ width: 20vmin; height: 20vmin; margin: 1vmin 1vmin 1vmin 2vmin; float: left; border: none; color: #fff; background-color: #45A737; font-size: 1.3rem;}
+
+.appendfile{ display: none; }
+.imgfile { width: 23vmin; height: 20vmin; margin: 1vmin; }
+#confirm{ background-color: #fff; border: 1px solid #45A737; border-radius: 5px; color: #45A737; padding: 5px 20px; font-size: 1.1rem; }
+
+
+/* 주인장이야기 헤더*/
+.sideNav{ height: -webkit-fill-available; width: 0; position: fixed; z-index: 3; top:0; right:0; padding-top: 10vmin; background-color: rgba(69, 167, 55, 0.7); overflow: scroll;}
+.sideNav_block{ width: 40vmin; }
+.sideNav>div{ padding: 4vmin; text-align: right; font-size: 1.1rem; color: #fff;  }
+.section_host{ padding-top: 50px; }
+
+.host_new_btn_fixed{ position: fixed; bottom: 5%; right: 5%; width: 7vmin; height: 7vmin; padding: 3vmin; border-radius: 50%; background-color: #ef9032; z-index: 2; }
+.host_new_btn_fixed img{ width: 7vmin; }
+
+/* 주인장이야기 게시판 */
+.board_article{ margin: 1vmin 0; padding: 1vmax 1vmin; background-color: #fff; border-bottom: 1px solid #eee; }
+.board_article:last-child{ border-bottom: none; }
+.host_btn img{ width: 15vmin; border: 2px solid #00A199; border-radius: 5px; padding: 2vmin; margin: 1vmax 3vmin 2vmax 0; }
+.board_no_img{ width: 50vmin; }
+.board_regtime{ font-size: 0.8rem; padding: 1vmin; margin: 2vmin 1vmin; }
+.board_content{ font-size: 1rem; text-align: justify; }
+.board_content img{ max-width: 98vmin; }
+.share_board img{ width: 13vmin; }
+
+.post_btn{ overflow: auto; background-color: #45A737; }
+.post_btn img{ width: 10vw; margin: 1vh 2vw; }
+#editor{ height: 450px; }
+.host_board_reg{ color: #fff; font-size: 2rem; font-weight: bold; font-family: '스냅스 쾌남열차'; margin: 1vw; }
+
+.host_board_add{ position: fixed; bottom : 7vmin; right: 7vmin; }
+.host_board_add img{ width: 10vmin; }
+
+/* 업소정보 관리 */
+.form_host_infor>div{ display: flex; flex-flow: row wrap; margin: 1vmax 0; padding: 1vmin; font-size: 1.1rem; }
+.host_infor_left{ flex: 3; }
+.host_infor_right{ flex: 7; display: flex; flex-flow: row wrap; position: relative;}
+
+.list_location_city{ margin-bottom: 1vmin; border: 1px solid #45A737; background-color: #fff; }
+
+.host_infor_time{ margin: 1vmin 0; }
+.host_infor_extra{ margin: 0 1vmin; flex: 1; }
+.host_infor_photo{ width: 100vmin; display: flex; flex-flow: row wrap; padding: 1vmin 0; }
+
+.host_infor_right>input, .host_infor_right>textarea{ font-size: 1.1rem; width: 100%; }
+.host_infor_right>textarea{ height: 4rem; }
+.host_infor_time input[type='time']{ background-color: #fff; font-size: 1.1rem; width: 26vmin; }
+.host_infor_time input[type='text']{ font-size: 1.1rem; width: 54vmin;}
+
+.host_infor_right textarea+span{ position: absolute; right: 1%; bottom: 0; font-size: 0.7rem; color: #aaa; }
+
+.host_infor_time span{ font-size: 0.9rem; }
+.host_infor_extra+span{ margin-top: 1vmin; font-size: 0.7rem; color: #555; }
+.host_infor_extra img{ display: none; height: 10vmin; }
+.host_infor_extra span{ font-size: 0.9rem; }
+.host_infor_photo img{ width: 22vmin; height: 22vmin; padding: 1vmin; }
+
+button.host_photo_mgr{  color: #45A737; background-color: #fff; border: 1px solid #45A737; font-size: 1.1rem; width: 20vmin; }
+
+button.host_infor_save, button.host_infor_cancel{ flex: auto; color: #45A737; background-color: #fff; border: 1px solid #45A737; font-size: 1.1rem; margin: 0 1vmin; padding: 1vmax 2vmin; }
+button.host_infor_save:hover, button.host_infor_cancel:hover{ color: #fff; background-color: #45A737; }
+
+.dialog_shop_photo{ display: none; align-items: center; position: fixed; top: 0; left: 0; width: 100vw; height: 100%; background-color: rgba(0, 0, 0, 0.9); z-index: 1; }
+.dialog_shop_photo img{ width: 100vw; }
+
+/* 업소사진 관리 */
+.host_photo{ margin: 1vmin; display: -webkit-box; display: -moz-box; display: box; -webkit-box-orient: block-axis; -moz-box-orient: block-axis; box-orient: block-axis; }
+.layer_photo{ margin-bottom: 1vmin; position: relative; }
+.layer_photo img{ width: 75vmin; height: 49vmin; box-sizing: border-box;}
+
+.host_photo_files input[type='file']{ opacity:0; position: absolute; }
+.photo_selector{ opacity: 0; position: absolute; }
+.photo_selector:checked+img{ border: 2px solid #45A737; }
+
+.host_photo_remote{ position: fixed; top: 25%; right: 1vmin; width: 22vmin; }
+
+.host_photo_remote>button{ display: block; width: 100%; margin-bottom: 1vmax; padding: 2vmin; color: #45A737; background-color: #fff; border: 1px solid #45A737; }
+.host_photo_remote>button:disabled{ border: 1px solid #aaa; color: #aaa; opacity: 0.5; }
+.host_photo_remote>button.save{ bottom: 1;}
+
+/* 메뉴판 관리 */
+.layout_host_menu{ display: flex; padding: 1vmin; border-bottom: 1px solid #eee; }
+.form_host_new_menu div{ background-color: #fffcb4; }
+.host_menu_left{ flex: 1; align-self: center; }
+.host_menu_right{ flex: 2; }
+.host_menu_right>div{ margin: 1vmin; line-height: 2; }
+.host_menu_right select, .host_menu_right input, .host_menu_right textarea{ font-size: 1.1rem; border: 1px solid #45A737; background-color: #fff; } 
+
+.host_menu_name, .host_menu_info{ position: relative; }
+.host_menu_name>span, .host_menu_info>span{ position: absolute; bottom: 0; right: 1%; font-size: 0.7rem; color: #aaa; }
+
+.host_menu_control{ position: fixed; bottom: 0; width: 100vmin; height: 4vmax; color: #fff; background-color: #45A737; text-align: center; font-size: 1.1rem; padding: 2vmin 0; z-index: 1; }
+.host_menu_delete{ padding: 1vmin; text-align: right; }
+.host_menu_delete img{ width: 5vmin; }
+.host_menu_add{ background-color: #b1ef32; }
+
+
+.host_menu_photo{ width: 30vmin; height: 30vmin; }
+.host_menu_left input[type='file']{ display: none; }
+.host_menu_price input{ width: 20vw; }
+.toggle_price{ color: #45A737; background-color: #fff; border: 1px solid #45A737; padding: 3px 0;  }
+.host_menu_info textarea{ height: 5rem; }
+.host_menu_type select, .host_menu_name input, .host_menu_info textarea{ width: 100%; }
+
+/* 번개할인 관리 */
+.discount_guid{ color: #aaa; font-size: 0.7rem; }
+.layout_host_discount{ margin: 10vmin 1vmin; }
+.layout_host_discount>div{ display: flex; margin: 10vmin 1vmin; }
+.host_discount_left{ flex: 3; font-size: 1.1rem; }
+.host_discount_right{ flex: 7; position: relative; }
+.host_discount_right input, .host_discount_right textarea{ font-size: 1.1rem; width: 100%; background-color: #fff; }
+.host_discount_right>span{ position: absolute; right: 0; bottom: 1%; color: #aaa; font-size: 0.7rem; }
+.host_discount_right input[type='time'], .host_discount_right input[type='number']{ width: 30vmin; text-align: right; }
+.host_discount_right textarea{ height: 4rem; }
+
+button.host_discount_save, button.host_discount_delete{ flex: auto; color: #45A737; background-color: #fff; border: 1px solid #45A737; font-size: 1.1rem; margin: 0 1vmin; padding: 1vmax 2vmin; }
+button.host_discount_save:hover, button.host_discount_delete:hover{ color: #fff; background-color: #45A737; }
+
+/* 이벤트 관리 */
+.event_guid{ color: #aaa; font-size: 0.7rem; }
+.layout_host_event{ margin: 2vmin 0 5vmin 0;}
+.host_event_delete{ text-align: right; }
+.host_event_delete img{ width: 5vmin; }
+.host_event_content{ display: flex; align-items: center; justify-content: center; text-align: center; width: 98vmin; height: 65vmin; border-radius: 8px; margin: 1vmin; background-size: 100% 100%; }
+
+.host_event_bottom{ display: flex; padding: 0 2vmin; }
+.host_event_duration{ position: relative; }
+.host_event_duration input{ opacity: 0; position: absolute; top: 0; width: 1px; }
+.host_event_duration input[name='date_start']{ left: 0; }
+.host_event_duration input[name='date_end']{ right: 0; }
+
+.host_event_floating{ flex: 1; display: flex; justify-content: flex-end; align-items: center; }
+
+.event_floating_border{ position: relative; width: 12vmin; height: 5vmin; margin: 0 1vmin; padding: 1px; border: 1px solid #aaa; border-radius: 10px; transition: .4s; }
+.event_floating_switch{ position: absolute; top: 1vmin; left: 1vmin; width: 4vmin; height: 4vmin; background-color: #aaa; border-radius: 6px; transition: .4s }
+.event_floating_text:after{ content: '해제'; color : #aaa; transition: .4s; }
+.isFloating{ display: none; }
+.isFloating:checked ~ div{ border: 1px solid #45A737; }
+.isFloating:checked ~ div div{ background-color: #45A737; left: 7vmin; }
+.isFloating:checked+span:after{ content: '표시'; color: #45A737;}
+
+.host_event_backgroundSelector{ margin-bottom: 2vmin; }
+.event_background{ margin-top: 2vmin; display: flex; flex-wrap: wrap;   }
+.event_background input{ display: none; }
+.event_background input:checked+img{ border: 2px solid #45A737; }
+.event_background img{ width: 30vmin; height: 22vmin; box-sizing: border-box; }
+
+.host_event_button{ display: flex; }
+button.host_event_preview, button.host_event_save, button.host_event_cancel{ flex: auto; color: #45A737; background-color: #fff; border: 1px solid #45A737; font-size: 1.1rem; margin: 0 1vmin; padding: 1vmax 2vmin; flex: 1; }
+button.host_event_preview:hover, button.host_event_save:hover, button.host_event_cancel:hover{ color: #fff; background-color: #45A737; }
+.button_disabled{ border-color: #aaa !important; color: #aaa !important; }
+
+.dialog_event{ display: none; align-items: center; justify-content: center; text-align: center; position: fixed; top: 25%; left: 1vmin; width: 98vmin; height: 65vmin; background-size: 100% 100%; border-radius: 8px; z-index: 3;}
+
+/* 검색어 관리 */
+.keyword_guid{ color: #aaa; font-size: 0.7rem; line-height: 1.5; }
+
+.keyword_list{ display: flex; flex-flow: row wrap; margin: 1vmin; }
+.keyword_list>div{ border: 1px solid #45A737; border-radius: 5px; margin: 1vmin 2vmin; padding: 1vmin 2vmin; } 
+.keyword_input{ margin: 2vmin auto; position: relative; width: fit-content; }
+.keyword_input input{ font-size: 1.1rem; padding: 1vmin 2vmin; }
+.keyword_input span{ position: absolute; top: 20%; right: 2%; }
+
+/* 손님이야기 조회 */
+.layout_host_review{ display: flex; flex-flow: row wrap; margin: 1vmin; padding: 1vmin 0; border-bottom: 1px solid #eee; }
+.layout_host_review:last-child{ border-bottom: none; }
+
+.host_review_infor{ width: 100vmin; display: flex; margin-bottom: 1vmin; }
+.review_infor_contact { flex: 1; }
+.review_infor_contact img{ height: 1.2rem; vertical-align: bottom; }
+.review_infor_date{ flex: 1; text-align: right; }	
+.review_delete img{ height: 1rem; margin-left: 2vmin; }
+
+.host_review_photo{ flex: 3; }
+.host_review_photo>div{ position: relative; width: 30vmin; height: 30vmin; }
+.review_photo_take{ position: absolute; width: 30vmin; height: 30vmin; background-position: center; background-size: cover; }
+.review_photo_more{ display: none; position: absolute; right: 0; bottom: 0; width: 8vmin; }
+
+.host_review_comment{ flex: 7; overflow: hidden; margin-left: 1vmin;}
+.limitedHeight{ max-height: 30vmin; }
+.review_emoticon img{ width: 20vmin; margin-bottom: 1vmin; }
+.review_message span{ word-break: break-all; }
+
+/* 손님이야기 사진 확대 landscape */
+.dialog_review_photo{ display: none; flex-direction: row; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #000; z-index: 1; }
+.photo_slide_select{ align-self: center; margin-left: auto; }
+.photo_slide_select>div{ width: 70vmin; height: 90vmin; background-position: center; background-size: contain; background-repeat: no-repeat; }
+.photo_slide_select img{ max-width: 70vw; max-height: 90vh; }
+.photo_slides{ align-self: center; display: flex; flex-direction: column; margin-left: 2vw; margin-right: auto; }
+.photo_slides img{  width: 30vh; height: 30vh; padding: 1vh 0; }
+.photo_slides>div{ width: 30vmin; height: 30vmin; background-position: center; background-size: cover; }
+
+.photo_slide_close{ width: 10vmin; float: right; position:absolute; top: 0; right: 0; }
+
+/* 대리운전 통계 */
+.call_month{ font-size: 1.3rem; display: flex; align-items: center; padding: 2vmin 4vmin 8vmin 4vmin; }
+.call_month>div{ flex: 3; text-align: center; }
+.call_month img{ height: 5vmin; }
+
+.result_header, .result_data, .result_total{ display: flex; margin: 1vmin 2vmin 0 2vmin; padding: 1vmin 0 2vmin 0; border-bottom: 1px solid #45A737; font-size: 1.1rem; }
+.result_header_no, .result_data_no{ flex-grow: 1; }
+.result_header_datetime, .result_data_datetime{ flex-grow: 3; }
+.result_header_count, .result_data_count{ flex-grow: 1; text-align: right; }
+
+.result_data_detail{ display: none; text-align: center; margin: 0 2vmin; padding: 1vmin 0; background-color: rgba(69, 167, 55, 0.25); border-bottom: 1px solid #45A737; }
+
+.result_count, .result_last{ margin: 0; padding: 2vmin; }
+.result_count{ background-color: #eaf4fa; }
+.result_last{ background-color: #fde3f8; }
+
+/* 로그인 */
+.host_login_guid{ font-size: 1.2rem; text-align: center; line-height: 2;}
+.host_login_password{ display: flex; flex-direction: column; align-items: center; }
+.host_login_password input{ font-size: 1.1rem; width:80vmin; padding: 2vmin 3vmin; margin: 5vmin 0; }
+.host_login_password button{ width: 50vmin; padding: 1vmin; background-color: #fff; border: 1px solid #45A737; color: #45A737; font-size: 1.1rem; }
+
+/* 비밀번호 변경 */
+.host_password_update{ display: flex; flex-direction: column; align-items: center; margin-top: 30vmin; }
+.host_password_update input{  font-size: 1.1rem; width: 80vmin; margin: 3vmin 0; padding: 2vmin 3vmin; }
+.host_password_update button{ width: 50vmin; padding: 1vmin; background-color: #fff; border: 1px solid #45A737; color: #45A737; font-size: 1.1rem; margin-top: 5vmin;}
