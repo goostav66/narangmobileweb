@@ -36,6 +36,6 @@
 %>
 
 <script>
-	alert("ìˆ˜ì •ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.");
+	alert("¼öÁ¤ÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.");
 	location.href="host_infor.jsp?p=<%=url%>";
 </script>

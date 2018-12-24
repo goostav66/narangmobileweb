@@ -30,16 +30,18 @@
 <section class="section_host">
 	<input type="hidden" name="url" value="<%=url%>">
 	<div class="host_menu_control">저장</div>
+	<div class="host_menu_panel" style="display: -webkit-box; -webkit-box-orient: block-axis; margin-bottom: 10vmin; ">
 <%	Vector<MenuBean> vlist = mMgr.getMenuList(shop_idx);
 	int i;
 	for(i = 0; i<vlist.size(); i++){
 		MenuBean menu = vlist.get(i);
 		String menu_photo = menu.getMenu_photo();
+		
 		boolean isUnion = false;
 		if(menu.getPrice()!=0)
 			isUnion=true;
 %>
-	<form class="form_host_menu" method="POST" enctype="multipart/form-data" id=<%=i%>>
+	<form class="form_host_menu" method="POST" enctype="multipart/form-data" style="-webkit-box-ordinal-group: <%=menu.getMenu_order()%>;">
 		<div class="layout_host_menu">
 			<input type="hidden" name="idx" value="<%=menu.getIdx()%>">
 			<div class="host_menu_left" align='center'>
@@ -52,7 +54,11 @@
 				<input type="hidden" name="img_src_prev" value="<%=menu_photo%>">
 			</div>
 			<div class="host_menu_right">
-				<div class="host_menu_delete"><img src="../images/icon_common/icon_x.png"></div>
+				<div class="host_menu_delete">
+					<span class="menu_upper">위로</span>
+					<span class="menu_lower">아래로</span>
+					<img src="../images/icon_common/icon_x.png">
+				</div>
 				<div class="host_menu_type">
 					<select name="menu_type">
 						<option value="0" <%if(menu.getMenu_type()==0){%>selected<%}%>>전체메뉴</option>
@@ -81,12 +87,19 @@
 		</div>
 	</form>
 <%} %>	
-	<section id="host_new_menu_layout">	
-	</section>		
+	
+	<!-- <section id="host_new_menu_layout">	
+	</section>	 -->
+	</div>	
 	<div class="host_new_btn_fixed host_menu_add">
 		<img src="../images/icon_common/icon_+.png">
 	</div>
 </section>
 </div><!-- div.wrap -->
+<script>
+/* 	$(document).ready(function(){
+		var BOG = "-webkit-box-ordinal-group";
+	}); */
+</script>
 </body>
 </html>

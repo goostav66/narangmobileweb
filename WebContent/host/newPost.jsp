@@ -5,7 +5,7 @@
 <%
 	String url = request.getParameter("p");
 	
-	if(session.getAttribute("HOST")==null) response.sendRedirect("host_board.jsp?p="+url);
+	if(session.getAttribute("HOST")==null && !session.getAttribute("HOST").equals("bshwc16")) response.sendRedirect("host_board.jsp?p="+url);
 	
 	String sIdx = request.getParameter("idx");//글 수정일때
 	int idx = 0;
