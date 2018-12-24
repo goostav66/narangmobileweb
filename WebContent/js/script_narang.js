@@ -713,6 +713,7 @@ $(document).ready(function(){
 			
 		}
 	});
+	
 	//메뉴판 관리 - 메뉴 저장
 	$(".host_menu_control").click(function(){
 		if(!confirm("변경한 내용을 저장하겠습니까?"))
@@ -722,7 +723,7 @@ $(document).ready(function(){
 		var form_menu_mod = $(".form_host_menu");
 		var form_menu_new = $(".form_host_new_menu");
 		
-		form_menu_mod.each(function(){
+		form_menu_mod.each(function(){//기존 메뉴 : 수정
 			var form = $(this)[0];
 			var id = $(this).attr("id");
 			
@@ -730,7 +731,8 @@ $(document).ready(function(){
 			if( $(this).find(".host_menu_name input").val().trim() == "" ){
 				alert("메뉴 이름을 입력해주세요.");
 				flag = false;
-				location.href='host_menu.jsp?p='+code+'#'+id;
+				var offset = $(this).offset();
+				$(document).scrollTop(offset.top);
 				return false;
 			}else{
 				$(this).find(".host_menu_price").each(function(){
@@ -740,7 +742,8 @@ $(document).ready(function(){
 							($(this).children("input[name='price_s']").val() == 0 && $(this).children("input[name='price_m']").val() == 0 && $(this).children("input[name='price_l']").val() == 0) ){
 						alert("가격을 입력해주세요.");	
 						flag = false;
-						location.href='host_menu.jsp?p='+code+'#'+id;		
+						var offset = $(this).offset();
+						$(document).scrollTop(offset.top);
 						return false;
 					}
 				});
@@ -750,21 +753,27 @@ $(document).ready(function(){
 			textarea.val(textarea.val().replace(/\n/g, ''));
 			var formData = new FormData(form);
 			
-			if( $(this).find("input[name='menu_photo']").files != null )
+			if( $(this).find("input[name='menu_photo']").files != null )//메뉴 사진
 				formData.append("menu_photo", $(this).find("input[name='menu_photo']").files[0]);
+			
+			var menu_order = $(this).css(BOG);//메뉴 순서
+			formData.append("menu_order", menu_order);
+			
 			$.ajax({
 				url: 'proc_menu.jsp?p='+code,
 				type: 'POST',
 				data: formData,
 				processData: false,
-				contentType: false
+				contentType: false,
+				success: function(){
+					location.reload();
+				}
 			});
 		});
 		
 		if(!flag) return;
 		
-
-		form_menu_new.each(function(){
+		form_menu_new.each(function(){//신규 메뉴 : 추가
 			
 			var form = $(this)[0];
 			var id = $(this).attr("id");
@@ -772,7 +781,8 @@ $(document).ready(function(){
 			if( $(this).find(".host_menu_name input").val().trim() == "" ){
 				alert("메뉴 이름을 입력해주세요.");
 				flag = false;
-				location.href='host_menu.jsp?p='+code+'#'+id;
+				var offset = $(this).offset();
+				$(document).scrollTop(offset.top);
 				return false;
 			}else{
 				$(this).find(".host_menu_price").each(function(){
@@ -782,7 +792,8 @@ $(document).ready(function(){
 							($(this).children("input[name='price_s']").val() == 0 && $(this).children("input[name='price_m']").val() == 0 && $(this).children("input[name='price_l']").val() == 0) ){
 						alert("가격을 입력해주세요.");	
 						flag = false;
-						location.href='host_menu.jsp?p='+code+'#'+id;		
+						var offset = $(this).offset();
+						$(document).scrollTop(offset.top);	
 						return false;
 					}
 				});
@@ -790,25 +801,31 @@ $(document).ready(function(){
 
 			var formData = new FormData(form);
 			
-			if( $(this).find("input[name='menu_photo']").files != null )
+			if( $(this).find("input[name='menu_photo']").files != null )//메뉴 사진
 				formData.append("menu_photo", $(this).find("input[name='menu_photo']").files[0]);
+			
+			var menu_order = $(this).css(BOG);//메뉴 순서
+			formData.append("menu_order", menu_order);
+			
 			$.ajax({
 				url: 'proc_menu.jsp?p='+code,
 				type: 'POST',
 				data: formData,
 				processData: false,
-				contentType: false
+				contentType: false,
+				success: function(){
+					location.reload();
+				}
 			});
 		});
 		if(flag){
 			alert("수정이 완료되었습니다.");
-			location.href="host_menu.jsp?p="+code;
 		}
 	});
 
 	//메뉴판 관리 - 메뉴 삭제
 	$(document).on('click', '.host_menu_delete img', function(){
-		if(confirm("메뉴를 삭제하겠습니까?\n저장을 하지 않아도 삭제한 메뉴는 복구할 수 없습니다.")){
+		if(confirm("메뉴를 삭제하겠습니까?\n삭제한 메뉴는 복구할 수 없습니다.")){
 			var menu_idx = $(this).closest(".form_host_menu").find("input[name='idx']").val();
 			if(menu_idx != null){
 				$.ajax({
@@ -819,6 +836,14 @@ $(document).ready(function(){
 					dataType: 'html'
 				})
 			}
+			var form = $(this).closest("form");
+			var this_bog = form.css(BOG);
+			$(".host_menu_panel form").each(function(){
+				if($(this).css(BOG) > this_bog){
+					$(this).css(BOG, ($(this).css(BOG)-1).toString());
+					return;
+				}
+			});
 			$(this).closest("form").remove();
 		}
 	});
@@ -862,10 +887,11 @@ $(document).ready(function(){
 	});
 
 	//메뉴판 관리 - 새 메뉴칸 추가
-	var new_menu_lastIdx = $(".form_host_menu:last").attr("id");
 	$(".host_menu_add").click(function(){
-		$("#host_new_menu_layout").append(form_host_new_menu);
-		$(".form_host_new_menu:last").attr("id", ++new_menu_lastIdx);
+		var new_menu_lastIdx = $(".host_menu_panel form").length;
+		console.log(new_menu_lastIdx);
+		$(".host_menu_panel").append(form_host_new_menu);
+		$(".form_host_new_menu:last").css("-webkit-box-ordinal-group", (new_menu_lastIdx+1).toString());
 		$(document).scrollTop($(document).height());
 	});
 	
@@ -884,6 +910,37 @@ $(document).ready(function(){
 	$(document).on('click', '.toggle_price', function(e){
 		e.preventDefault();
 		$(this).closest(".layout_host_menu").find(".host_menu_price").toggle();
+	});
+	
+	
+	//메뉴판 관리 - 순서 바꾸기 (위로)
+	$(document).on('click', '.menu_upper', function(){
+		var menu = $(this).closest('form');
+		var idx = menu.css(BOG);
+		
+		$(".host_menu_panel form").each(function(){
+			if( $(this).css(BOG) == (idx-1) ){
+				$(this).css(BOG, idx);
+				return;
+			}
+		});
+		menu.css( BOG, (idx-1).toString() );
+	});
+	
+	//메뉴판 관리 - 순서 바꾸기(아래로)
+	$(document).on('click', '.menu_lower', function(){
+		var menu = $(this).closest('form');
+		var idx = menu.css(BOG);
+		var last_bog = $(".host_menu_panel form").length;
+		
+		$(".host_menu_panel form").each(function(){
+			if($(this).css(BOG) == (idx*1+1) ){
+				$(this).css(BOG, idx);
+				return;
+			}
+		});
+		if( idx < last_bog )
+			menu.css( BOG, (idx*1+1).toString() );	
 	});
 	
 	//손님 이야기 조회 - overflowed text toggle
@@ -1500,14 +1557,17 @@ function getParameters(paramName) {//GET 방식 URL 파라미터 가져오기
     }
 };
 
-var form_host_new_menu = '<form class="form_host_new_menu" enctype="multipart/form-data" id="">'
+var form_host_new_menu = '<form class="form_host_new_menu" enctype="multipart/form-data" style="-webkit-box-ordinal-group: -1">'
 	+'<div class="layout_host_menu">'
 	+'	<div class="host_menu_left" align="center">'	
 	+'		<img src="../images/menu/noimage.jpg" class="host_menu_photo">'
 	+'		<input type="file" name="menu_photo" accept="image/*">'
 	+'	</div>'
 	+'	<div class="host_menu_right">'
-	+'		<div class="host_menu_delete"><img src="../images/icon_common/icon_x.png"></div>'
+	+'		<div class="host_menu_delete">'
+	+'		<span class="menu_upper">위로</span>'
+	+'		<span class="menu_lower">아래로</span>'	
+	+'		<img src="../images/icon_common/icon_x.png"></div>'
 	+'		<div class="host_menu_type">'
 	+'			<select name="menu_type">'
 	+'				<option value="0">전체메뉴</option>'
