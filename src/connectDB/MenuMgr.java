@@ -33,9 +33,9 @@ public class MenuMgr {
 		
 		try {
 			con = pool.getConnection();
-			sql = "SELECT * FROM shop_menu WHERE shop_idx = "+shop_idx;
+			sql = "SELECT * FROM shop_menu WHERE shop_idx = ? ORDER BY menu_order";
 			pstmt = con.prepareStatement(sql);
-			
+			pstmt.setInt(1, shop_idx);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
@@ -52,7 +52,7 @@ public class MenuMgr {
 				String menu_photo= rs.getString("menu_photo");
 
 				bean.setMenu_photo(menu_photo);
-				
+				bean.setMenu_order(rs.getInt("menu_order"));
 				vlist.add(bean);
 			}
 			
@@ -75,7 +75,7 @@ public class MenuMgr {
 		
 		try {
 			con = pool.getConnection();
-			sql = "SELECT * FROM shop_menu WHERE shop_idx = ? AND menu_type = ?";
+			sql = "SELECT * FROM shop_menu WHERE shop_idx = ? AND menu_type = ? ORDER BY menu_order";
 			
 			pstmt = con.prepareStatement(sql);
 			pstmt.setInt(1, shop_idx);
@@ -96,7 +96,7 @@ public class MenuMgr {
 				String menu_photo= rs.getString("menu_photo");
 				
 				bean.setMenu_photo(menu_photo);
-				
+				bean.setMenu_order(rs.getInt("menu_order"));
 				vlist.add(bean);
 			}
 			
@@ -131,6 +131,7 @@ public class MenuMgr {
 				bean.setPrice_m(rs.getInt("price_m"));
 				bean.setPrice_l(rs.getInt("price_l"));
 				bean.setMenu_photo(rs.getString("menu_photo"));
+				bean.setMenu_order(rs.getInt("menu_order"));
 			}
 			
 		} catch(CommunicationsException ce) {
@@ -147,7 +148,8 @@ public class MenuMgr {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql = null;
-				
+		ResultSet rs = null;
+		
 		int price = 0, price_s = 0, price_m = 0, price_l = 0;
 		String menu_photo = null;
 		
@@ -161,8 +163,10 @@ public class MenuMgr {
 		
 		try {
 			con = pool.getConnection();
-			sql = "INSERT INTO shop_menu (shop_idx, menu_name, menu_type, menu_infor, price, price_s, price_m, price_l, menu_photo) "
-				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			
+		
+			sql = "INSERT INTO shop_menu (shop_idx, menu_name, menu_type, menu_infor, price, price_s, price_m, price_l, menu_photo, menu_order) "
+				+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
 			pstmt = con.prepareStatement(sql);
 			
@@ -175,7 +179,7 @@ public class MenuMgr {
 			pstmt.setInt(7, price_m);
 			pstmt.setInt(8, price_l);
 			pstmt.setString(9, menu_photo);
-			
+			pstmt.setInt(10, Integer.parseInt(multi.getParameter("menu_order")));
 			pstmt.execute();
 			
 		} catch(CommunicationsException ce) {
@@ -206,7 +210,7 @@ public class MenuMgr {
 		try {
 			con = pool.getConnection();
 			sql = "UPDATE shop_menu SET menu_name = ?, menu_type = ?, menu_infor = ?, "
-				+ "price = ?, price_s = ?, price_m = ?, price_l = ?, menu_photo = ? WHERE idx = ?";
+				+ "price = ?, price_s = ?, price_m = ?, price_l = ?, menu_photo = ?, menu_order = ? WHERE idx = ?";
 			
 			pstmt = con.prepareStatement(sql);
 			
@@ -218,7 +222,8 @@ public class MenuMgr {
 			pstmt.setInt(6, price_m);
 			pstmt.setInt(7, price_l);
 			pstmt.setString(8, menu_photo);
-			pstmt.setInt(9, Integer.parseInt(multi.getParameter("idx")));
+			pstmt.setInt(9, Integer.parseInt(multi.getParameter("menu_order")));
+			pstmt.setInt(10, Integer.parseInt(multi.getParameter("idx")));
 			
 			pstmt.execute();
 			

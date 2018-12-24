@@ -11,6 +11,7 @@ public class MenuBean {
 	private int price_m;
 	private int price_l;
 	private String menu_photo;
+	private int menu_order;
 	
 	public int getIdx() {
 		return idx;
@@ -73,6 +74,10 @@ public class MenuBean {
 	public void setMenu_photo(String menu_photo) {
 		this.menu_photo = menu_photo;
 	}
-	
-	
+	public int getMenu_order() {
+		return menu_order;
+	}
+	public void setMenu_order(int menu_order) {
+		this.menu_order = menu_order;
+	}
 }
