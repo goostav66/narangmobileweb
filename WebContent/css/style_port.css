@@ -273,7 +273,7 @@ input, textarea{ border: 1px solid #45A737; background-color: #fff; outline: non
 .sideNav>div{ padding: 4vmin; text-align: right; font-size: 1.1rem; color: #fff; }
 .section_host{ padding-top: 50px; }
 
-.host_new_btn_fixed{ position: fixed; bottom: 5%; right: 5%; width: 7vmin; height: 7vmin; padding: 3vmin; border-radius: 50%; background-color: #ef9032; z-index: 2; }
+.host_new_btn_fixed{ position: fixed; bottom: 1%; right: 5%; width: 7vmin; height: 7vmin; padding: 3vmin; border-radius: 50%; background-color: #ef9032; z-index: 2; }
 .host_new_btn_fixed img{ width: 7vmin; }
 
 /* 주인장이야기 게시판 */
@@ -344,8 +344,13 @@ button.host_infor_save:hover, button.host_infor_cancel:hover{ color: #fff; backg
 .host_photo_remote>button.save{ bottom: 1; }
 
 /* 메뉴판 관리 */
-.layout_host_menu{ display: flex; padding: 1vmin; border-bottom: 1px solid #eee; }
+.layout_host_menu{ display: flex; flex-direction: column; padding: 1vmin; border-bottom: 1px solid #eee; }
 .form_host_new_menu div{ background-color: #fffcb4; }
+.host_menu_settings{ text-align: right; }
+.host_menu_settings img{ width: 6vmin; }
+.menu_name_brief{ float: left; }
+.host_menu_settings .menu_detail{ display: none;}
+.host_menu_details{ display: flex; flex-direction: row; }
 .host_menu_left{ flex: 1; align-self: center; }
 .host_menu_right{ flex: 2; }
 .host_menu_right>div{ margin: 1vmin; line-height: 2; }
@@ -355,8 +360,7 @@ button.host_infor_save:hover, button.host_infor_cancel:hover{ color: #fff; backg
 .host_menu_name>span, .host_menu_info>span{ position: absolute; bottom: 0; right: 1%; font-size: 0.7rem; color: #aaa; }
 
 .host_menu_control{ position: fixed; bottom: 0; width: 100vmin; height: 4vmax; color: #fff; background-color: #45A737; text-align: center; font-size: 1.1rem; padding: 2vmin 0; z-index: 1; }
-.host_menu_delete{ padding: 1vmin; text-align: right; }
-.host_menu_delete img{ width: 5vmin; }
+
 .host_menu_add{ background-color: #b1ef32; }
 
 
