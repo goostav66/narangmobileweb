@@ -749,6 +749,7 @@ $(document).ready(function(){
 				});
 			}
 			
+			
 			var textarea = $(this).find("textarea[name='menu_infor']");
 			textarea.val(textarea.val().replace(/\n/g, ''));
 			var formData = new FormData(form);
@@ -764,11 +765,9 @@ $(document).ready(function(){
 				type: 'POST',
 				data: formData,
 				processData: false,
-				contentType: false,
-				success: function(){
-					location.reload();
-				}
+				contentType: false
 			});
+			
 		});
 		
 		if(!flag) return;
@@ -783,7 +782,7 @@ $(document).ready(function(){
 				flag = false;
 				var offset = $(this).offset();
 				$(document).scrollTop(offset.top);
-				return false;
+				//return false;
 			}else{
 				$(this).find(".host_menu_price").each(function(){
 					if( $(this).css("display") == "none" )
@@ -798,7 +797,8 @@ $(document).ready(function(){
 					}
 				});
 			}
-
+				
+			
 			var formData = new FormData(form);
 			
 			if( $(this).find("input[name='menu_photo']").files != null )//메뉴 사진
@@ -812,11 +812,9 @@ $(document).ready(function(){
 				type: 'POST',
 				data: formData,
 				processData: false,
-				contentType: false,
-				success: function(){
-					location.reload();
-				}
+				contentType: false
 			});
+			
 		});
 		if(flag){
 			alert("수정이 완료되었습니다.");
@@ -824,7 +822,7 @@ $(document).ready(function(){
 	});
 
 	//메뉴판 관리 - 메뉴 삭제
-	$(document).on('click', '.host_menu_delete img', function(){
+	$(document).on('click', '.menu_delete', function(){
 		if(confirm("메뉴를 삭제하겠습니까?\n삭제한 메뉴는 복구할 수 없습니다.")){
 			var menu_idx = $(this).closest(".form_host_menu").find("input[name='idx']").val();
 			if(menu_idx != null){
@@ -912,6 +910,24 @@ $(document).ready(function(){
 		$(this).closest(".layout_host_menu").find(".host_menu_price").toggle();
 	});
 	
+	//메뉴판 관리 - 메뉴 간략히
+	$(document).on('click', '.menu_brief', function(){
+		var menu = $(this).closest(".layout_host_menu");
+		var menu_name = menu.find("input[name='menu_name']").val();
+		menu.find(".menu_name_brief").text(menu_name);
+		menu.find(".host_menu_details").hide();
+		$(this).hide();
+		menu.find(".menu_detail").show();
+	});
+	
+	//메뉴판 관리 - 메뉴 자세히
+	$(document).on('click', '.menu_detail', function(){
+		var menu = $(this).closest(".layout_host_menu");
+		menu.find(".menu_name_brief").text("");
+		menu.find(".host_menu_details").show();
+		$(this).hide();
+		menu.find(".menu_brief").show();
+	});
 	
 	//메뉴판 관리 - 순서 바꾸기 (위로)
 	$(document).on('click', '.menu_upper', function(){
@@ -1559,15 +1575,20 @@ function getParameters(paramName) {//GET 방식 URL 파라미터 가져오기
 
 var form_host_new_menu = '<form class="form_host_new_menu" enctype="multipart/form-data" style="-webkit-box-ordinal-group: -1">'
 	+'<div class="layout_host_menu">'
+	+'	<div class="host_menu_settings">'
+	+'		<span class="menu_name_brief"></span>'	
+	+'		<span class="menu_detail"><img src="../images/icon_common/icon_menu_detail.png"></span>'
+	+'		<span class="menu_brief"><img src="../images/icon_common/icon_menu_brief.png"></span>'
+	+'		<span class="menu_upper"><img src="../images/icon_common/icon_arrow_upper.png" alt="메뉴 위로"></span>'
+	+'		<span class="menu_lower"><img src="../images/icon_common/icon_arrow_lower.png" alt="메뉴 아래로"></span>'
+	+'		<span class="menu_delete"><img src="../images/icon_common/icon_menu_delete.png" alt="메뉴 삭제"></span>'
+	+'	</div>'
+	+'	<div class="host_menu_details">'
 	+'	<div class="host_menu_left" align="center">'	
 	+'		<img src="../images/menu/noimage.jpg" class="host_menu_photo">'
 	+'		<input type="file" name="menu_photo" accept="image/*">'
 	+'	</div>'
 	+'	<div class="host_menu_right">'
-	+'		<div class="host_menu_delete">'
-	+'		<span class="menu_upper">위로</span>'
-	+'		<span class="menu_lower">아래로</span>'	
-	+'		<img src="../images/icon_common/icon_x.png"></div>'
 	+'		<div class="host_menu_type">'
 	+'			<select name="menu_type">'
 	+'				<option value="0">전체메뉴</option>'
@@ -1592,5 +1613,5 @@ var form_host_new_menu = '<form class="form_host_new_menu" enctype="multipart/fo
 	+'			<textarea name="menu_infor" placeholder="메뉴 설명" maxlength="60"></textarea>'
 	+'			<span></span>'
 	+'		</div>'
-	+'	</div>'
+	+'	</div></div>'
 	+'</div></form>';
