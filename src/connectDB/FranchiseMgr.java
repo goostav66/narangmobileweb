@@ -551,65 +551,81 @@ public class FranchiseMgr {
 	}
 	
 	//업소정보 수정
-	public void updateShopInfor(FranchiseBean shop) {
+	public void updateShopInfor(FranchiseBean shop, int r_type) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		String sql = null;
 		
 		try {
 			con = pool.getConnection();
-			sql = "UPDATE shop SET shop_name = ?, shop_phone = ?, location_code = ?, shop_addr = ?, "
-				+ "open_weekDay = ?, close_weekDay = ?, open_weekEnd = ?, close_weekEnd = ?, offday = ?, "
-				+ "recom_menu = ?, intro_text = ?, discount = ?, isParking = ?, isSeats = ?, lat = ?, lng = ?, shop_edit_date = CURRENT_TIMESTAMP() WHERE idx = ?";
-			pstmt = con.prepareStatement(sql);
-			
-			pstmt.setString(1, shop.getShop_name());
-			pstmt.setString(2, shop.getShop_phone());
-			pstmt.setInt(3, shop.getLocation_code());
-			pstmt.setString(4, shop.getShop_addr());
-			pstmt.setString(5, shop.getOpen_weekDay());
-			pstmt.setString(6, shop.getClose_weekDay());
-			pstmt.setString(7, shop.getOpen_weekEnd());
-			pstmt.setString(8, shop.getClose_weekEnd());
-			pstmt.setString(9, shop.getOffday());
-			pstmt.setString(10, shop.getRecom_menu());
-			pstmt.setString(11, shop.getIntro_text());
-			pstmt.setInt(12, shop.getDiscount());
-			pstmt.setInt(13, shop.getIsParking());
-			pstmt.setInt(14, shop.getIsSeats());
-			pstmt.setDouble(15, shop.getLat());
-			pstmt.setDouble(16, shop.getLng());
-			pstmt.setInt(17, shop.getIdx());
-			
+			if( r_type == 1 ) {//업소정보
+				sql = "UPDATE shop SET shop_name = ?, shop_phone = ?, location_code = ?, shop_addr = ?, lat = ?, lng = ?, shop_edit_date = CURRENT_TIMESTAMP() "
+					+ "WHERE idx = ? ";
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setString(1, shop.getShop_name());
+				pstmt.setString(2, shop.getShop_phone());
+				pstmt.setInt(3, shop.getLocation_code());
+				pstmt.setString(4, shop.getShop_addr());
+				pstmt.setDouble(5, shop.getLat());
+				pstmt.setDouble(6, shop.getLng());
+				pstmt.setInt(7, shop.getIdx());
+				
+			}else if( r_type == 2 ) {//영업정보
+				sql = "UPDATE shop SET open_weekDay = ?, close_weekDay = ?, open_weekEnd = ?, close_weekEnd = ?, offday = ?, " 
+					+ "recom_menu = ?, intro_text = ?, discount = ?, isParking = ?, isSeats = ?, shop_edit_date = CURRENT_TIMESTAMP() "
+					+ "WHERE idx = ?";
+				pstmt = con.prepareStatement(sql);
+				
+				pstmt.setString(1, shop.getOpen_weekDay());
+				pstmt.setString(2, shop.getClose_weekDay());
+				pstmt.setString(3, shop.getOpen_weekEnd());
+				pstmt.setString(4, shop.getClose_weekEnd());
+				pstmt.setString(5, shop.getOffday());
+				pstmt.setString(6, shop.getRecom_menu());
+				pstmt.setString(7, shop.getIntro_text());
+				pstmt.setInt(8, shop.getDiscount());
+				pstmt.setInt(9, shop.getIsParking());
+				pstmt.setInt(10, shop.getIsSeats());
+				pstmt.setInt(11, shop.getIdx());
+			}
+
 			pstmt.execute();
 			
 		} catch(CommunicationsException ce) {
-			updateShopInfor(shop);
+			updateShopInfor(shop, r_type);
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			pool.freeConnection(con, pstmt);
 		}
 	}
-	
+		
 	//관할 대리점 정보 가져오기
-	public AgentBean getManagerInfo(String url) {
+	public ManagerInfoBean getManagerInfo(String url) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql = null;
-		AgentBean bean = new AgentBean();
+		ManagerInfoBean bean = new ManagerInfoBean();
 		try {
 			con = pool.getConnection();
-			sql = "SELECT a.* FROM agent AS a LEFT JOIN shop AS s ON a.agent_code = s.manager_code WHERE s.url = ?";
+			sql = "SELECT b.branch_code, a.agent_code, b.branch_name, a.agent_name, b.branch_manager_phone, a.agent_manager_phone "
+				+ "FROM shop AS s " 
+				+ "LEFT JOIN branch AS b ON b.branch_code = s.manager_code " 
+				+ "LEFT JOIN agent AS a ON a.agent_code = s.manager_code " 
+				+ "WHERE s.url = ?";
 			pstmt = con.prepareStatement(sql);
 			
 			pstmt.setString(1, url);
 			
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
+				bean.setBranch_code(rs.getString("branch_code"));
 				bean.setAgent_code(rs.getString("agent_code"));
+				bean.setBranch_name(rs.getString("branch_name"));
 				bean.setAgent_name(rs.getString("agent_name"));
+				bean.setBranch_manager_phone(rs.getString("branch_manager_phone"));
 				bean.setAgent_manager_phone(rs.getString("agent_manager_phone"));
 			}
 			
