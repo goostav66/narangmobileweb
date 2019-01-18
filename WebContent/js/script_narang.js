@@ -5,8 +5,12 @@ $(document).ready(function(){
 		navigator.vibrate(100);
 	});
 	
+	$(".main_promotion_slide").marquee({
+		duplicated: true
+	});
+	
 	//메인화면 사진 슬라이드 세팅
-	$(".photo_panel:eq(0)").css("display", "flex");
+	/*$(".photo_panel:eq(0)").css("display", "flex");
 	var photo_panel_index = 0;
 	var photo_panel_length = $(".photo_panel").length;
 	
@@ -25,9 +29,7 @@ $(document).ready(function(){
 		}
 	}
 	
-	$(".main_promotion_slide").marquee({
-		duplicated: true
-	});
+	
 	
 	
 	//메인화면 슬라이드 수동
@@ -65,7 +67,7 @@ $(document).ready(function(){
 			slide.css({'display': 'flex', 'left': '-100%'});
 		slide.animate({left: 0}, 500);
 		setAutoPhotoSlide(4000);
-	} 
+	} */
 	
 	//대리운전 호출 : 안드로이드에서 접속했을 때만 호출
 	$("#call_driver_button").click(function(){
@@ -114,11 +116,16 @@ $(document).ready(function(){
 	
 	
 	//업소정보: 업소사진<->지도 토글
-	$(".loc").click(function(){
+	$(".toggle_location").click(function(){
 		$("#shop_photo").toggle();
 		$("#map_photo").toggle();
+		$(".toggle_location").toggle();
 	});
 	
+	$(document).on('click', '.shop_main_photo', function(){
+		var code = getParameters("p");
+		location.href="shop_photoSlide.jsp?p="+code;
+	});
 	//전자메뉴판: 메뉴 사진 플로트
 	$(".menu_photo").click(function(){
 		var menu_name = $(this).next().find(".menu_name").text();
@@ -230,7 +237,7 @@ $(document).ready(function(){
 			}
 		});
 		
-		var title = src.find(".shop_name").text()+"에서 번개할인 행사중!";
+		var title = src.find(".shop_name").text().trim()+"에서 번개할인 행사중!";
 		var description = src.find(".shop_msg").text();
 		var imageUrl = src.find(".shop_photo img").attr('src');
 		var webUrl = 'http://hanjicds001.gabia.io/reserve/franch_infor.jsp?p='+src.find("input[name='url']").val()+'&idx='+src.find("input[name='dc_idx']").val()+'&is=y';
@@ -366,7 +373,7 @@ $(document).ready(function(){
 		var description = "주인장 이야기에서 작성한 글을 확인해보세요";
 		var imageUrl;
 		if( src.find(".board_content img") != null )
-			imageUrl = src.find(".board_content img").attr('src');
+			imageUrl = src.find(".board_content img").attr('src').trim();
 		else
 			imageUrl = $("input[name='photo_url']").val();
 		var webUrl = "http://hanjicds001.gabia.io/host/host_board_ex.jsp?p="+code+"&idx="+idx;
@@ -432,7 +439,7 @@ $(document).ready(function(){
 	$(".host_infor_save").click(function(e){
 		e.preventDefault();
 		
-		if( confirm("변경한 내용을 저장하겠습니까?") ){	
+		/*if( confirm("변경한 내용을 저장하겠습니까?") ){	
 			//유효성 체크
 			if( $("input[name='shop_name']").val().trim() == "" ){
 				alert("업소명을 입력해주세요.");
@@ -450,25 +457,7 @@ $(document).ready(function(){
 				alert("시간을 입력해주세요.");
 				return;
 			}
-			$(".host_infor_right textarea").each(function(){
-				var txt = $(this).val();
-				$(this).val(txt.replace(/\n/g, ''));
-			});
-			
-			//주소지 위도, 경도 측정
-			var full_address = $(".list_location_city option:selected").text() + $("textarea[name='shop_addr']").val();
-			
-			var geocoder = new daum.maps.services.Geocoder();
-			
-			geocoder.addressSearch(full_address, function(result, status){
-				if(status === daum.maps.services.Status.OK){
-					var coords = new daum.maps.LatLng(result[0].y, result[0].x);	
-					$("#shop_lat").val(coords.getLat());
-					$("#shop_lng").val(coords.getLng());			
-				}
-				$(".form_host_infor").submit();
-			});
-		}
+		}*/
 	});
 	
 	//업소정보 관리 - 취소
@@ -480,9 +469,19 @@ $(document).ready(function(){
 	});
 	
 
+	//업소정보 관리 - 관할 지점에 전화 걸기
+	$(document).on("click", ".manager_call", function(){
+		var phone = $("input[name='manager_phone_number']").val();
+		if(phone == '')
+			alert('해당 지점의 전화번호 정보가 없습니다');
+		else{
+			location.href="tel:"+phone;
+		}
+	});
+	
 	
 	//업소정보 관리 - 부가정보 아이콘 변경
-	$("#extra_dc_rate").click(function(){
+	$(document).on("click", "#extra_dc_rate", function(){
 		var input_discount = $(this).find("input[name='discount']");
 		$(this).children("img").css("display", "none");
 		
@@ -490,8 +489,9 @@ $(document).ready(function(){
 		if( discount_rate>15 ) discount_rate = 0;
 		initIconDcRate(discount_rate);
 		input_discount.val(discount_rate);
+		$(".alert_modified").show();
 	});
-	$("#extra_is_parking").click(function(){
+	$(document).on("click", "#extra_is_parking", function(){
 		var input_isParking = $(this).find("input[name='isParking']");
 		$(this).children("img").css("display", "none");
 		
@@ -499,8 +499,9 @@ $(document).ready(function(){
 		if( isParking>1 ) isParking = 0;
 		initIconIsParking(isParking);
 		input_isParking.val(isParking);
+		$(".alert_modified").show();
 	});
-	$("#extra_is_seats").click(function(){
+	$(document).on("click", "#extra_is_seats", function(){
 		var input_isSeats = $(this).find("input[name='isSeats']");
 		$(this).children("img").css("display", "none");
 		
@@ -508,15 +509,17 @@ $(document).ready(function(){
 		if( isSeats>1 ) isSeats = 0;
 		initIconIsSeats(isSeats);
 		input_isSeats.val(isSeats);
+		$(".alert_modified").show();
 	});
-	//업소정보 관리 - 글자수 제한 표시&숨기기
-	$(document).on("focus", ".host_infor_right textarea", function(){
+
+	//업소정보 관리 - 글자수 제한 표시&숨기기(주소, 추천메뉴, 한줄소개)
+	$(document).on("focus", ".table_cell_row textarea", function(){
 		setTextLength($(this), $(this).next("span"), 100);
 	});
-	$(document).on("blur", ".host_infor_right textarea", function(){
+	$(document).on("blur", ".table_cell_row textarea", function(){
 		$(this).next("span").text("");
 	});
-	$(document).on("keyup", ".host_infor_right textarea", function(){
+	$(document).on("keyup", ".table_cell_row textarea", function(){
 		var txt = $(this).val();
 		if( txt.length > 100){
 			var maximum_txt = txt.substr(0, 100);
@@ -527,9 +530,8 @@ $(document).ready(function(){
 	});
 	
 	//업소정보 관리 - 사진 변경
-	$(".host_photo_mgr").click(function(e){
-		e.preventDefault();
-		var code = $("input[name='url']").val();
+	$(document).on("click", ".shop_photos", function(){
+		var code = getParameters("p");
 		window.open("host_infor_photo.jsp?p="+code);
 	});
 	//업소정보 관리 - 사진 확대
@@ -713,6 +715,7 @@ $(document).ready(function(){
 			
 		}
 	});
+	
 	//메뉴판 관리 - 메뉴 저장
 	$(".host_menu_control").click(function(){
 		if(!confirm("변경한 내용을 저장하겠습니까?"))
@@ -722,7 +725,7 @@ $(document).ready(function(){
 		var form_menu_mod = $(".form_host_menu");
 		var form_menu_new = $(".form_host_new_menu");
 		
-		form_menu_mod.each(function(){
+		form_menu_mod.each(function(){//기존 메뉴 : 수정
 			var form = $(this)[0];
 			var id = $(this).attr("id");
 			
@@ -730,7 +733,8 @@ $(document).ready(function(){
 			if( $(this).find(".host_menu_name input").val().trim() == "" ){
 				alert("메뉴 이름을 입력해주세요.");
 				flag = false;
-				location.href='host_menu.jsp?p='+code+'#'+id;
+				var offset = $(this).offset();
+				$(document).scrollTop(offset.top);
 				return false;
 			}else{
 				$(this).find(".host_menu_price").each(function(){
@@ -740,18 +744,24 @@ $(document).ready(function(){
 							($(this).children("input[name='price_s']").val() == 0 && $(this).children("input[name='price_m']").val() == 0 && $(this).children("input[name='price_l']").val() == 0) ){
 						alert("가격을 입력해주세요.");	
 						flag = false;
-						location.href='host_menu.jsp?p='+code+'#'+id;		
+						var offset = $(this).offset();
+						$(document).scrollTop(offset.top);
 						return false;
 					}
 				});
 			}
+			
 			
 			var textarea = $(this).find("textarea[name='menu_infor']");
 			textarea.val(textarea.val().replace(/\n/g, ''));
 			var formData = new FormData(form);
 			
-			if( $(this).find("input[name='menu_photo']").files != null )
+			if( $(this).find("input[name='menu_photo']").files != null )//메뉴 사진
 				formData.append("menu_photo", $(this).find("input[name='menu_photo']").files[0]);
+			
+			var menu_order = $(this).css(BOG);//메뉴 순서
+			formData.append("menu_order", menu_order);
+			
 			$.ajax({
 				url: 'proc_menu.jsp?p='+code,
 				type: 'POST',
@@ -759,12 +769,12 @@ $(document).ready(function(){
 				processData: false,
 				contentType: false
 			});
+			
 		});
 		
 		if(!flag) return;
 		
-
-		form_menu_new.each(function(){
+		form_menu_new.each(function(){//신규 메뉴 : 추가
 			
 			var form = $(this)[0];
 			var id = $(this).attr("id");
@@ -772,8 +782,9 @@ $(document).ready(function(){
 			if( $(this).find(".host_menu_name input").val().trim() == "" ){
 				alert("메뉴 이름을 입력해주세요.");
 				flag = false;
-				location.href='host_menu.jsp?p='+code+'#'+id;
-				return false;
+				var offset = $(this).offset();
+				$(document).scrollTop(offset.top);
+				//return false;
 			}else{
 				$(this).find(".host_menu_price").each(function(){
 					if( $(this).css("display") == "none" )
@@ -782,16 +793,22 @@ $(document).ready(function(){
 							($(this).children("input[name='price_s']").val() == 0 && $(this).children("input[name='price_m']").val() == 0 && $(this).children("input[name='price_l']").val() == 0) ){
 						alert("가격을 입력해주세요.");	
 						flag = false;
-						location.href='host_menu.jsp?p='+code+'#'+id;		
+						var offset = $(this).offset();
+						$(document).scrollTop(offset.top);	
 						return false;
 					}
 				});
 			}
-
+				
+			
 			var formData = new FormData(form);
 			
-			if( $(this).find("input[name='menu_photo']").files != null )
+			if( $(this).find("input[name='menu_photo']").files != null )//메뉴 사진
 				formData.append("menu_photo", $(this).find("input[name='menu_photo']").files[0]);
+			
+			var menu_order = $(this).css(BOG);//메뉴 순서
+			formData.append("menu_order", menu_order);
+			
 			$.ajax({
 				url: 'proc_menu.jsp?p='+code,
 				type: 'POST',
@@ -799,16 +816,16 @@ $(document).ready(function(){
 				processData: false,
 				contentType: false
 			});
+			
 		});
 		if(flag){
 			alert("수정이 완료되었습니다.");
-			location.href="host_menu.jsp?p="+code;
 		}
 	});
 
 	//메뉴판 관리 - 메뉴 삭제
-	$(document).on('click', '.host_menu_delete img', function(){
-		if(confirm("메뉴를 삭제하겠습니까?\n저장을 하지 않아도 삭제한 메뉴는 복구할 수 없습니다.")){
+	$(document).on('click', '.menu_delete', function(){
+		if(confirm("메뉴를 삭제하겠습니까?\n삭제한 메뉴는 복구할 수 없습니다.")){
 			var menu_idx = $(this).closest(".form_host_menu").find("input[name='idx']").val();
 			if(menu_idx != null){
 				$.ajax({
@@ -819,6 +836,14 @@ $(document).ready(function(){
 					dataType: 'html'
 				})
 			}
+			var form = $(this).closest("form");
+			var this_bog = form.css(BOG);
+			$(".host_menu_panel form").each(function(){
+				if($(this).css(BOG) > this_bog){
+					$(this).css(BOG, ($(this).css(BOG)-1).toString());
+					return;
+				}
+			});
 			$(this).closest("form").remove();
 		}
 	});
@@ -862,10 +887,11 @@ $(document).ready(function(){
 	});
 
 	//메뉴판 관리 - 새 메뉴칸 추가
-	var new_menu_lastIdx = $(".form_host_menu:last").attr("id");
 	$(".host_menu_add").click(function(){
-		$("#host_new_menu_layout").append(form_host_new_menu);
-		$(".form_host_new_menu:last").attr("id", ++new_menu_lastIdx);
+		var new_menu_lastIdx = $(".host_menu_panel form").length;
+		console.log(new_menu_lastIdx);
+		$(".host_menu_panel").append(form_host_new_menu);
+		$(".form_host_new_menu:last").css("-webkit-box-ordinal-group", (new_menu_lastIdx+1).toString());
 		$(document).scrollTop($(document).height());
 	});
 	
@@ -884,6 +910,55 @@ $(document).ready(function(){
 	$(document).on('click', '.toggle_price', function(e){
 		e.preventDefault();
 		$(this).closest(".layout_host_menu").find(".host_menu_price").toggle();
+	});
+	
+	//메뉴판 관리 - 메뉴 간략히
+	$(document).on('click', '.menu_brief', function(){
+		var menu = $(this).closest(".layout_host_menu");
+		var menu_name = menu.find("input[name='menu_name']").val();
+		menu.find(".menu_name_brief").text(menu_name);
+		menu.find(".host_menu_details").hide();
+		$(this).hide();
+		menu.find(".menu_detail").show();
+	});
+	
+	//메뉴판 관리 - 메뉴 자세히
+	$(document).on('click', '.menu_detail', function(){
+		var menu = $(this).closest(".layout_host_menu");
+		menu.find(".menu_name_brief").text("");
+		menu.find(".host_menu_details").show();
+		$(this).hide();
+		menu.find(".menu_brief").show();
+	});
+	
+	//메뉴판 관리 - 순서 바꾸기 (위로)
+	$(document).on('click', '.menu_upper', function(){
+		var menu = $(this).closest('form');
+		var idx = menu.css(BOG);
+		
+		$(".host_menu_panel form").each(function(){
+			if( $(this).css(BOG) == (idx-1) ){
+				$(this).css(BOG, idx);
+				return;
+			}
+		});
+		menu.css( BOG, (idx-1).toString() );
+	});
+	
+	//메뉴판 관리 - 순서 바꾸기(아래로)
+	$(document).on('click', '.menu_lower', function(){
+		var menu = $(this).closest('form');
+		var idx = menu.css(BOG);
+		var last_bog = $(".host_menu_panel form").length;
+		
+		$(".host_menu_panel form").each(function(){
+			if($(this).css(BOG) == (idx*1+1) ){
+				$(this).css(BOG, idx);
+				return;
+			}
+		});
+		if( idx < last_bog )
+			menu.css( BOG, (idx*1+1).toString() );	
 	});
 	
 	//손님 이야기 조회 - overflowed text toggle
@@ -915,7 +990,7 @@ $(document).ready(function(){
 		$(".dialog_review_photo").hide();
 	});
 	//손님 이야기 조회 - 확대할 사진 선택
-	$(document).on("click", ".photo_slides img", function(){
+	$(document).on("click", ".photo_slides div", function(){
 		var src = $(this).css('background-image');
 	    src = src.replace('url(','').replace(')','');
 		$(".photo_slide_select div").css("background-image", 'url('+src+')');
@@ -996,7 +1071,6 @@ $(document).ready(function(){
 			alert("내용에 포함될 수 없는 특수문자가 있습니다.(>, <)");
 			return;
 		}
-		
 		if(idx != null){//이벤트 내용 수정
 			$.ajax({
 				url: 'proc_event.jsp',
@@ -1276,6 +1350,68 @@ $(document).ready(function(){
 	});
 	
 	
+	//주인장이야기 로그인
+	function hostLogin(){
+		var host = getParameters("p");
+		var password = $(".host_login_form input[name='password']").val();
+		
+		$.ajax({
+			url: 'proc_login.jsp',
+			type: 'POST',
+			data: { host : host, password : password },
+			success: function(msg){
+				if(msg.trim() == "login_success"){
+					location.href="host_board.jsp?p="+host;
+				}else if(msg.trim() == "incorrect_password"){
+					alert("비밀번호를 확인해주세요.");
+				}
+			},
+			error: function(){
+				alert("오류가 발생하여 로그인할 수 없습니다.\n본사 관리자에게 문의해주세요.");
+			}
+		})
+	}
+	//주인장이야기 로그인(클릭, 엔터)
+	$(document).on("click", ".btn_host_login", function(e){
+		hostLogin();
+	});
+	$(document).on("keyup", ".host_login_form input", function(e){
+		if(e.keyCode == 13)
+			hostLogin();
+	});
+	
+	//주인장이야기 비밀번호 변경
+	function hostModPass(){
+		//비밀번호 유효성 확인
+		if($(".host_password_form input:first").val() != $(".host_password_form input:last").val()){
+			alert("비밀번호가 일치하지 않습니다.");
+			return;
+		}
+		
+		//비밀번호 변경
+		var p = getParameters("p");
+		var password = $("input[name='password']").val();
+
+		$.ajax({
+			url: 'proc_password.jsp',
+			type: 'POST',
+			data: { p : p, password : password },
+			success: function(){
+				alert("비밀번호를 변경하였습니다.");
+				location.href="host_board.jsp?p="+p;
+			}
+		})
+	}
+	
+	//주인장이야기 비밀번호 변경
+	$(document).on("click", ".btn_host_password", function(){
+		hostModPass();
+	});
+	$(document).on("keyup", ".host_password_form input[name='password']", function(e){
+		if(e.keyCode == 13)
+			hostModPass();
+	});
+	
 	//손님 이야기 조회 - 숨은 사진 보기 버튼 토글 
 	function togglePhotoMore(img){
 		var src = img.attr("src");
@@ -1286,7 +1422,7 @@ $(document).ready(function(){
 	}
 	
 	//비밀번호 변경 - 체크
-	$(document).on("click", ".host_password_update button", function(){
+	$(document).on("click", ".btn_confirm.btn_host_password", function(){
 		var pass1 = $("input:first").val();
 		var pass2 = $("input:last").val();
 		
@@ -1500,14 +1636,22 @@ function getParameters(paramName) {//GET 방식 URL 파라미터 가져오기
     }
 };
 
-var form_host_new_menu = '<form class="form_host_new_menu" enctype="multipart/form-data" id="">'
+var form_host_new_menu = '<form class="form_host_new_menu" enctype="multipart/form-data" style="-webkit-box-ordinal-group: -1">'
 	+'<div class="layout_host_menu">'
+	+'	<div class="host_menu_settings">'
+	+'		<span class="menu_name_brief"></span>'	
+	+'		<span class="menu_detail"><img src="../images/icon_common/icon_menu_detail.png"></span>'
+	+'		<span class="menu_brief"><img src="../images/icon_common/icon_menu_brief.png"></span>'
+	+'		<span class="menu_upper"><img src="../images/icon_common/icon_arrow_upper.png" alt="메뉴 위로"></span>'
+	+'		<span class="menu_lower"><img src="../images/icon_common/icon_arrow_lower.png" alt="메뉴 아래로"></span>'
+	+'		<span class="menu_delete"><img src="../images/icon_common/icon_menu_delete.png" alt="메뉴 삭제"></span>'
+	+'	</div>'
+	+'	<div class="host_menu_details">'
 	+'	<div class="host_menu_left" align="center">'	
 	+'		<img src="../images/menu/noimage.jpg" class="host_menu_photo">'
 	+'		<input type="file" name="menu_photo" accept="image/*">'
 	+'	</div>'
 	+'	<div class="host_menu_right">'
-	+'		<div class="host_menu_delete"><img src="../images/icon_common/icon_x.png"></div>'
 	+'		<div class="host_menu_type">'
 	+'			<select name="menu_type">'
 	+'				<option value="0">전체메뉴</option>'
@@ -1532,5 +1676,5 @@ var form_host_new_menu = '<form class="form_host_new_menu" enctype="multipart/fo
 	+'			<textarea name="menu_infor" placeholder="메뉴 설명" maxlength="60"></textarea>'
 	+'			<span></span>'
 	+'		</div>'
-	+'	</div>'
+	+'	</div></div>'
 	+'</div></form>';
