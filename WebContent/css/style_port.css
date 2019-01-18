@@ -18,6 +18,9 @@ input, textarea{ border: 1px solid #45A737; background-color: #fff; outline: non
 .old{ display: none }
 .invisible{ visibility: hidden; }	
 
+.btn_cancel{ color: #45A737; background-color: #fff; border: 1px solid #45A737; }
+.btn_confirm{ color: #fff; background-color: #45A737; border: 1px solid #45A737; }
+
 .dialog_share{ position: fixed; display: none; width: 80vmin; height: 40vmin; top: 40%; left: 10vmin; background-color: #fff; z-index: 3; }
 .dialog_title { margin: 1vmin; }
 .dialog_close{ margin: 1vmin; float: right; }
@@ -25,18 +28,18 @@ input, textarea{ border: 1px solid #45A737; background-color: #fff; outline: non
 .dialog_share_icon{ clear: both; margin: 4vmin 0; }
 .dialog_share_icon>div{ display:inline-block; margin: 1vmin 2.5vmin; line-height: 2}
 .dialog_share_icon>div img{ width: 15vmin; }
-.dialog_share_icon>div span{ font-size: 0.9rem; }
-.dialog_background, .sideNav_background{ position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; background-color: rgba(0,0,0,0.5); display: none; }
+.dialog_share_icon>div span{ font-size: 0.9rem; }	
+.shop_background, .dialog_background, .sideNav_background{ position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; background-color: rgba(0,0,0,0.5); display: none; }
 
 /* 메인화면 */
 .pre{ background-repeat: no-repeat; background-position: center; background-size: contain; margin: 0; width: 100vmin; height: 100vmax; position: fixed; top: 0; left: 0; }
 
 .header_logo { text-align: center; margin: 4vmin 0; display: flex; align-items: center; }
-.header_logo img { height: 2rem; padding-left : 4vmin; } 
+.header_logo img { height: 2rem; padding-left: 4vmin; } 
 .header_logo span { font-family: '스냅스 쾌남열차'; font-size: 1.5rem; flex: 1; }
 
 .main_photo { position: relative; width: 100vmin; height: 65vmin; }
-.photo_panel { width: 98vmin; height: 65vmin; position: absolute; margin-left: 1vmin; background-size: 100% 100%; border-radius: 8px; display: none; align-items: center; justify-content: center; }
+.photo_panel { width: 100vmin !important; height: 65vmin; /* position: absolute;  margin-left: 1vmin;*/ background-size: 100% 100%; /* border-radius: 8px;  display: none; align-items: center; justify-content: center; */ }
 
 .photo_control{ position: absolute; right: 10vmin; bottom: 2vmin; }
 .photo_control img { width: 5vmin; }
@@ -156,6 +159,8 @@ input, textarea{ border: 1px solid #45A737; background-color: #fff; outline: non
 .label{ flex:1; text-align: center; font-size: 1.5rem; padding: 1vmax 0; border-top: 5px solid #45A737; border-bottom: 1px solid #45A737; border-right: 0.5px solid #AAA; font-family: '스냅스 쾌남열차'; }	
 .label:last-child{ border-right: none; }
 
+#franch_header{ position: inherit; width: 100vmin; background-color: #fff; }
+
 .table_franch_infor{ margin: auto; font-size: 1rem; }
 .table_franch_infor th{padding: 1%; text-align: left; width: 30%;}
 .table_franch_infor td{padding: 1%;}
@@ -166,10 +171,18 @@ input, textarea{ border: 1px solid #45A737; background-color: #fff; outline: non
 .layer_map{	width: 100vw; position: relative; }
 .slide, #map{ width: 100vw; height: 62vw; background-size: 100% 100% !important; background-repeat: no-repeat; }
 
-.layer_icon{ position: absolute; top: 0; right: 1%; z-index: 2;}
+.slide img{ width: 100vmin; height: 62vmin;}
+
+.layer_icon{ position: absolute; top: 1; right: 1%; z-index: 2;}
 .layer_icon img{ width: 10vw; height: 10vw; }
 .layer_navi{ position: absolute; top: 11vw; right: 1%; z-index: 2; }
 .layer_navi img{ width: 10vw; }
+
+.layer_map_menu{ display: flex;}
+.layer_map_menu>div{ display: flex; flex-flow: column; padding: 2vmin; }
+.layer_map_menu>div img{ width: 15vmin; }
+.layer_map_menu>div span{ text-align: center; }
+.layer_expand img, .layer_contract img{ width: 10vmin; border-top: 0.3px solid #000 }
 
 .franch_infor{ position:relative; }
 .layout_sale{ position: absolute; top: 0; background-color: #000; color: #fff; opacity: 0.8; width: 98vw; height:98%; margin: 1vw; padding-top: 10%;}
@@ -185,7 +198,6 @@ input, textarea{ border: 1px solid #45A737; background-color: #fff; outline: non
 
 /* 전자메뉴판 메뉴*/
 .layout_menu{ overflow: auto; display: flex; border-bottom: 1px solid #eee; }
-.layout_menu:last-child{ border-bottom: none; }
 
 .menu_photo{ flex: 3; }
 .menu_photo>div{ width: 30vmin; height: 30vmin; background-size: cover; background-position: center; }
@@ -255,17 +267,27 @@ input, textarea{ border: 1px solid #45A737; background-color: #fff; outline: non
 
 /* 손님 이야기 */
 .guest_img{ width: 100vmin; display: block; margin-left: auto; margin-right: auto; }
-.layer_emoticon{ overflow: auto; margin-bottom: 2vmin; }
+.layer_emoticon{ overflow: auto; margin: 2vmin 0; }
 .layer_emoticon input[type='radio']{ display: none; }
 .layer_emoticon input[type='radio']:checked+img{ background-color: #45A737; }
 .emoticon{ width: 25vmin; float: left; }
-#ta_comment{ width: 95vmin; padding: 12px 20px; box-sizing: border-box; border: 2px solid #45A737; border-radius: 4px; font-size: 1.2rem; margin: 0 1vmin 1vmin 1vmin; }
-#filebutton{ width: 20vmin; height: 20vmin; margin: 1vmin 1vmin 1vmin 2vmin; float: left; border: none; color: #fff; background-color: #45A737; font-size: 1.3rem;}
+
+#ta_comment{ width: 95vmin; padding: 10px; box-sizing: border-box; border: 2px solid #45A737; border-radius: 4px; font-size: 1.2rem; margin: 0 1vmin 1vmin 1vmin; }
+
+.guid_image_upload{ display: flex; align-items: center; }
+#filebutton{ width: 8vmin; margin: 1vmin 1vmin 1vmin 2vmin; float: left; border: none; color: #fff; font-size: 1.3rem;}
+
+#btn_contact{ width: 8vmin; margin-right: 1vmin; }
+.guid_customer_contact{ display: flex; align-items: center; position: relative; }
+#check_customer_contact{ position: absolute; visibility: hidden; left: 0; }
+#text_customer_contact{ width: 50vmin; padding: 2vmin; top: 0; left: 100vmin; transition: .4s; position: absolute; }
+#check_customer_contact:checked + span{ display: none; }
+#check_customer_contact:checked + span + #text_customer_contact{ left: 1vmin; }
 
 .appendfile{ display: none; }
-.imgfile { width: 23vmin; height: 20vmin; margin: 1vmin; }
-#confirm{ background-color: #fff; border: 1px solid #45A737; border-radius: 5px; color: #45A737; padding: 5px 20px; font-size: 1.1rem; }
-
+.imgfile { width: 26vmin; height: 23vmin; margin: 1vmin; }
+#btn_guest_confirm{ flex:1; background-color: #45A737; border: 1px solid #45A737; border-radius: 7px; color: #fff; padding: 3vmin; margin: 1vmin; font-size: 1.1rem; outline: none; }
+#btn_guest_cancel{ flex: 1; padding: 3vmin; outline: none; background-color: #fff; border: 1px solid #45A737; color: #45A737; margin: 1vmin; font-size: 1.1rem; border-radius: 7px; }
 
 /* 주인장이야기 헤더*/
 .sideNav{ height: -webkit-fill-available; width: 0; position: fixed; z-index: 3; top:0; right:0; padding-top: 10vmin; background-color: rgba(69, 167, 55, 0.7); overflow: scroll; }
@@ -273,7 +295,7 @@ input, textarea{ border: 1px solid #45A737; background-color: #fff; outline: non
 .sideNav>div{ padding: 4vmin; text-align: right; font-size: 1.1rem; color: #fff; }
 .section_host{ padding-top: 50px; }
 
-.host_new_btn_fixed{ position: fixed; bottom: 5%; right: 5%; width: 7vmin; height: 7vmin; padding: 3vmin; border-radius: 50%; background-color: #ef9032; z-index: 2; }
+.host_new_btn_fixed{ position: fixed; bottom: 1%; right: 5%; width: 7vmin; height: 7vmin; padding: 3vmin; border-radius: 50%; background-color: #ef9032; z-index: 2; }
 .host_new_btn_fixed img{ width: 7vmin; }
 
 /* 주인장이야기 게시판 */
@@ -290,9 +312,9 @@ input, textarea{ border: 1px solid #45A737; background-color: #fff; outline: non
 .share_board img{ width: 13vmin; }
 
 .post_btn{ overflow: auto; background-color: #45A737; }
-.post_btn img{ width: 10vw; margin: 1vh 2vw;}
-#editor{ height: 450px; }
-.host_board_reg{ color: #fff; font-size: 2rem; font-weight: bold; font-family: 'Nanum Gothic'; margin: 1vw; }
+.post_btn img{ height: 1.5rem; margin: 1vh 2vw;}
+#editor{ height: 80vh; padding-top: 20px; }
+.host_board_reg{ color: #fff; font-size: 1.5rem; font-weight: bold; font-family: 'Nanum Gothic'; margin: 1vw; }
 
 .host_board_add{ position: fixed; bottom : 7vmin; right: 7vmin; }
 .host_board_add img{ width: 10vmin; }
@@ -322,9 +344,9 @@ input, textarea{ border: 1px solid #45A737; background-color: #fff; outline: non
 
 button.host_photo_mgr{ color: #45A737; background-color: #fff; border: 1px solid #45A737; font-size: 1.1rem; width: 20vmin; }
 
-button.host_infor_save, button.host_infor_cancel{ flex: auto; color: #45A737; background-color: #fff; border: 1px solid #45A737; font-size: 1.1rem; margin: 0 1vmin; padding: 1vmax 2vmin; }
-button.host_infor_save:hover, button.host_infor_cancel:hover{ color: #fff; background-color: #45A737; }
-
+button.host_infor_save, button.host_infor_cancel{ flex: auto; border: 1px solid #45A737; font-size: 1.1rem; margin: 0 1vmin; padding: 1vmax 2vmin; }
+button.host_infor_save{ color: #fff; background-color: #45A737; }
+button.host_infor_cancel{ color: #45A737; background-color: #fff; }
 .dialog_shop_photo{ display: none; align-items: center; position: fixed; top: 0; left: 0; width: 100vw; height: 100%; background-color: rgba(0, 0, 0, 0.9); z-index: 1; }
 .dialog_shop_photo img{ width: 100vw; }
 
@@ -344,8 +366,13 @@ button.host_infor_save:hover, button.host_infor_cancel:hover{ color: #fff; backg
 .host_photo_remote>button.save{ bottom: 1; }
 
 /* 메뉴판 관리 */
-.layout_host_menu{ display: flex; padding: 1vmin; border-bottom: 1px solid #eee; }
+.layout_host_menu{ display: flex; flex-direction: column; padding: 1vmin; border-bottom: 1px solid #eee; }
 .form_host_new_menu div{ background-color: #fffcb4; }
+.host_menu_settings{ text-align: right; }
+.host_menu_settings img{ width: 6vmin; }
+.menu_name_brief{ float: left; }
+.host_menu_settings .menu_detail{ display: none;}
+.host_menu_details{ display: flex; flex-direction: row; }
 .host_menu_left{ flex: 1; align-self: center; }
 .host_menu_right{ flex: 2; }
 .host_menu_right>div{ margin: 1vmin; line-height: 2; }
@@ -355,8 +382,7 @@ button.host_infor_save:hover, button.host_infor_cancel:hover{ color: #fff; backg
 .host_menu_name>span, .host_menu_info>span{ position: absolute; bottom: 0; right: 1%; font-size: 0.7rem; color: #aaa; }
 
 .host_menu_control{ position: fixed; bottom: 0; width: 100vmin; height: 4vmax; color: #fff; background-color: #45A737; text-align: center; font-size: 1.1rem; padding: 2vmin 0; z-index: 1; }
-.host_menu_delete{ padding: 1vmin; text-align: right; }
-.host_menu_delete img{ width: 5vmin; }
+
 .host_menu_add{ background-color: #b1ef32; }
 
 
@@ -378,8 +404,7 @@ button.host_infor_save:hover, button.host_infor_cancel:hover{ color: #fff; backg
 .host_discount_right input[type='time'], .host_discount_right input[type='number']{ width: 30vmin; text-align: right; }
 .host_discount_right textarea{ height: 4rem; }
 
-button.host_discount_save, button.host_discount_delete{ flex: auto; color: #45A737; background-color: #fff; border: 1px solid #45A737; font-size: 1.1rem; margin: 0 1vmin; padding: 1vmax 2vmin; }
-button.host_discount_save:hover, button.host_discount_delete:hover{ color: #fff; background-color: #45A737; }
+button.host_discount_save, button.host_discount_delete{ flex: auto; border: 1px solid #45A737; font-size: 1.1rem; margin: 0 1vmin; padding: 1vmax 2vmin; }
 
 /* 이벤트 관리 */
 .event_guid{ color: #aaa; font-size: 0.7rem; }
@@ -404,8 +429,10 @@ button.host_discount_save:hover, button.host_discount_delete:hover{ color: #fff;
 .isFloating:checked ~ div div{ background-color: #45A737; left: 7vmin; }
 .isFloating:checked+span:after{ content: '표시'; color: #45A737;}
 
+.host_event_steps{ height: 100vmin; }
+
 .host_event_backgroundSelector{ margin-bottom: 2vmin; }
-.event_background{ margin-top: 2vmin; display: flex; flex-wrap: wrap;   }
+.event_background{ margin-top: 2vmin; display: table-cell; }
 .event_background input{ display: none; }
 .event_background input:checked+img{ border: 2px solid #45A737; }
 .event_background img{ width: 30vmin; height: 22vmin; box-sizing: border-box; }
@@ -413,8 +440,8 @@ button.host_discount_save:hover, button.host_discount_delete:hover{ color: #fff;
 .host_event_dateSelector{ margin-bottom: 5vmin; }
 
 .host_event_button{ display: flex; }
-button.host_event_preview, button.host_event_save, button.host_event_cancel{ flex: auto; color: #45A737; background-color: #fff; border: 1px solid #45A737; font-size: 1.1rem; margin: 0 1vmin; padding: 1vmax 2vmin; flex: 1; }
-button.host_event_preview:hover, button.host_event_save:hover, button.host_event_cancel:hover{ color: #fff; background-color: #45A737; }
+button.host_event_preview, button.host_event_save, button.host_event_cancel{ flex: auto; border: 1px solid #45A737; font-size: 1.1rem; margin: 0 1vmin; padding: 1vmax 2vmin; flex: 1; }
+
 .button_disabled{ border-color: #aaa !important; color: #aaa !important; }
 
 .dialog_event{ display: none; align-items: center; justify-content: center; text-align: center; position: fixed; top: 25%; left: 1vmin; width: 98vmin; height: 65vmin; background-size: 100% 100%; border-radius: 8px; z-index: 3;}
@@ -475,12 +502,13 @@ button.host_event_preview:hover, button.host_event_save:hover, button.host_event
 .result_last{ background-color: #fde3f8; }
 
 /* 로그인 */
-.host_login_guid{ font-size: 1.2rem; text-align: center; line-height: 2;}
-.host_login_password{ display: flex; flex-direction: column; align-items: center; }
-.host_login_password input{ font-size: 1.1rem; width:80vmin; padding: 2vmin 3vmin; margin: 5vmin 0; }
-.host_login_password button{ width: 50vmin; padding: 1vmin; background-color: #fff; border: 1px solid #45A737; color: #45A737; font-size: 1.1rem; }
+.host_login_content{ display: flex; flex-flow: column; align-items: center; margin-top: 10vmin; }
+.host_login_guid{ font-size: 0.9rem; color: #aaa; width: 90%; text-align: center; }
+.host_login_form>div, .host_password_form>div{ margin-top: 4vmin; }
+.host_login_form input{ padding: 10px 12px; }
+.host_login_form button{ width: 100%; padding: 10px 12px; }
 
 /* 비밀번호 변경 */
-.host_password_update{ display: flex; flex-direction: column; align-items: center; margin-top: 30vmin; }
-.host_password_update input{  font-size: 1.1rem; width: 80vmin; margin: 3vmin 0; padding: 2vmin 3vmin; }
-.host_password_update button{ width: 50vmin; padding: 1vmin; background-color: #fff; border: 1px solid #45A737; color: #45A737; font-size: 1.1rem; margin-top: 5vmin;}
+.host_password_form input{ padding: 10px 12px; }
+.host_password_form button{ padding: 10px 12px; flex: 1;}
+.btn_host_password{ margin-left: 1vmin; }
