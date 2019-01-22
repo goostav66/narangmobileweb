@@ -21,7 +21,7 @@
 	<jsp:param value="<%=shop_name%>" name="h"/>
 </jsp:include>
 
-<section class="section_host">
+<section class="section_host" style="margin-bottom: 15vmin;">
 	<input type="hidden" name="url" value="<%=url%>">
 	<input type="hidden" name="shop_name" value="<%=shop_name%>">
 	<input type="hidden" name="photo_url" value="<%=ptMgr.getMainPhoto(shop_idx).getPhoto_url()%>">

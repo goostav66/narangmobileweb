@@ -76,7 +76,7 @@
 	<%} %>
 </section>
 <div class="dialog_review_photo">
-	<img class="photo_slide_close" src="../images/icon_common/icon_x_r.png">
+	<img class="photo_slide_close" src="../images/icon_common/icon_arrow_right.png">
 	<div class="photo_slide_select"></div>
 	<div class="photo_slides"></div>
 </div>

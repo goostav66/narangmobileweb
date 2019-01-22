@@ -20,7 +20,7 @@
 	<jsp:param value="이벤트 관리" name="h"/>
 </jsp:include>
 
-<section class="section_host">
+<section class="section_host" style="margin-bottom: 15vmin;">
 	<input type="hidden" name="url" value="<%=url%>">
 	<span class="event_guid">각 항목을 클릭하면 수정할 수 있습니다.</span>	
 	<div class="host_new_btn_fixed" onclick="location.href='host_event_textEditor.jsp?p=<%=url%>'">
