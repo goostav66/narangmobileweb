@@ -460,15 +460,62 @@ $(document).ready(function(){
 		}*/
 	});
 	
-	//업소정보 관리 - 취소
-	$(".host_infor_cancel").click(function(e){
-		e.preventDefault();
-		var code = $("input[name='url']").val();
-		if( confirm("취소하겠습니까?\n변경한 내용은 저장되지 않습니다.") )
-			location.href="host_infor.jsp?p="+code;
+	//확인
+	$(document).on("click", ".btn_infor_save", function(){
+		
+		//textarea : 줄 띄우기 방지
+		$("textarea").each(function(){
+			var txt = $(this).val();
+			$(this).val(txt.replace(/\n/g, ''));
+		});
+		var form = $(".loaded_infor_content").serialize();
+		
+		$.ajax({
+			url: 'proc_infor.jsp',
+			type: 'POST',
+			data: form,
+			success: function(){
+				alert("저장이 완료되었습니다.");
+				$(".alert_modified").hide();
+			}
+		})
 	});
 	
+	//업소정보 관리 - 뒤로 가기
+	$(document).on("click", ".host_infor_back", function(){
+		var flag = true;
+		var alert = $(".alert_modified").css("display");
+		if( alert != "none" )
+			flag = confirm("변경한 내용을 저장하지 않고 돌아갑니다.");
 
+		if( flag ){
+			$(".loaded_infor_content").empty();
+			$(".host_infor_mod_section").hide();
+			$(".host_infor_junction").show();
+			$(".alert_modified").hide();
+		}
+	});
+	
+	//업소정보 관리 - 내용변경 경고 표시
+	$(document).on("change", ".loaded_infor_content", function(e){
+		$(".alert_modified").show();
+	});
+
+	//업소정보 관리 - 주소지 위도, 경도 변경
+	$(document).on("change", "textarea[name='shop_addr']", function(){
+		
+		var full_address = $(".list_location_city option:selected").text() + $("textarea[name='shop_addr']").val();
+		var geocoder = new daum.maps.services.Geocoder();
+		
+		geocoder.addressSearch(full_address, function(result, status){
+			if(status === daum.maps.services.Status.OK){
+				var coords = new daum.maps.LatLng(result[0].y, result[0].x);	
+				$("#shop_lat").val(coords.getLat());
+				$("#shop_lng").val(coords.getLng());
+			}
+		});
+	});
+	
 	//업소정보 관리 - 관할 지점에 전화 걸기
 	$(document).on("click", ".manager_call", function(){
 		var phone = $("input[name='manager_phone_number']").val();
