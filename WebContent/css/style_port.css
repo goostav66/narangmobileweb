@@ -12,7 +12,7 @@ form{ margin: 0;}
 a{ text-decoration: none; color: #000; }
 a:visited { color: #000; }
 button{ font-family: 'Nanum Gothic'; }
-input, textarea{ border: 1px solid #45A737; background-color: #fff; outline: none; }
+select, input, textarea{ border: 1px solid #45A737; background-color: #fff; outline: none; }
 
 .right{ float:right; }
 .old{ display: none }
@@ -320,35 +320,31 @@ input, textarea{ border: 1px solid #45A737; background-color: #fff; outline: non
 .host_board_add img{ width: 10vmin; }
 
 /* 업소정보 관리 */
-.form_host_infor>div{ display: flex; flex-flow: row wrap; margin: 1vmax 0; padding: 1vmin; font-size: 1.1rem; }
-.host_infor_left{ flex: 3; }
-.host_infor_right{ flex: 7; display: flex; flex-flow: row wrap; position: relative;  }
+.host_infor_junction{ margin: 2vmin; }
+.host_infor_subject{ border: 1px solid #aaa; border-radius: 5px; padding: 5vmin; margin: 2vmin 0; display: flex; align-items: center; }
+.host_infor_subject .infor_subject_char{ flex: 6; }
+.guid_host_infor, .subject_char_footer{ font-size: 0.9rem; }
+.host_infor_subject .infor_subject_imgs{ flex: 1; }
+.infor_subject_imgs img{ width: 100%; }
 
-.host_infor_right textarea+span{ position: absolute; right: 1%; bottom: 0; font-size: 0.7rem; color: #aaa; }
+.host_infor_content{ display: table; }
+.content_table_cell{ width: 100vmin; box-sizing: border-box; padding: 2vmin; }
+.table_cell_header{ padding: 2vmin 0; }
+.table_cell_row{ margin: 1vmin 0; }
+.table_cell_row>div{  }
+.table_cell_row input, .table_cell_row textarea, .table_cell_row span:not(.marker_length_textarea){ width: 100%; padding: 2vmin; border-radius: 5px; }
+.marker_length_textarea{ position: absolute; right: 1%; bottom: 0; font-size: 0.7rem; color: #aaa; }
+.table_cell_row input[type='time']{ width: 40%; }
+.table_cell_row img{ height: 1.5rem; }
+.table_cell_row select{ border-radius: 5px; padding: 1vmin; }
 
-.list_location_city{ margin-bottom: 1vmin; border: 1px solid #45A737; background-color: #fff; }
-.host_infor_time{ margin: 1vmin 0; }
-.host_infor_extra{ margin: 0 1vmin; flex: 1; }
-.host_infor_photo{ width: 100vmin; display: flex; flex-flow: row wrap; padding: 1vmin 0; }
+.host_infor_back{ display: flex; align-items: center;}
+.host_infor_back img{ height: 1.5rem; }
+.host_infor_back .alert_modified{ color: #F00; font-size: 0.9rem; display: none; }
 
-.host_infor_right>input, .host_infor_right>textarea{ font-size: 1.1rem; width: 100%; }
-.host_infor_right>textarea{ height: 4rem; }
-.host_infor_time input[type='time']{ background-color: #fff; font-size: 1.1rem; width: 26vmin; }
-.host_infor_time input[type='text']{ font-size: 1.1rem; width: 54vmin;}
+.host_infor_extra img{ display: none; }
 
-.host_infor_time span{ font-size: 0.9rem; }
-.host_infor_extra+span, .host_infor_photo+span{ margin-top: 1vmin; font-size: 0.7rem; color: #555; }
-.host_infor_extra img{ display: none; height: 10vmin; }
-.host_infor_extra span{ font-size: 0.9rem; }
-.host_infor_photo img{ width: 22vmin; height: 22vmin; padding: 1vmin; }
-
-button.host_photo_mgr{ color: #45A737; background-color: #fff; border: 1px solid #45A737; font-size: 1.1rem; width: 20vmin; }
-
-button.host_infor_save, button.host_infor_cancel{ flex: auto; border: 1px solid #45A737; font-size: 1.1rem; margin: 0 1vmin; padding: 1vmax 2vmin; }
-button.host_infor_save{ color: #fff; background-color: #45A737; }
-button.host_infor_cancel{ color: #45A737; background-color: #fff; }
-.dialog_shop_photo{ display: none; align-items: center; position: fixed; top: 0; left: 0; width: 100vw; height: 100%; background-color: rgba(0, 0, 0, 0.9); z-index: 1; }
-.dialog_shop_photo img{ width: 100vw; }
+.btn_infor_save{ padding: 3vmin 15vmin; border-radius: 5px; }
 
 /* 업소사진 관리 */
 .host_photo{ margin: 1vmin; display: -webkit-box; display: -moz-box; display: box; -webkit-box-orient: block-axis; -moz-box-orient: block-axis; box-orient: block-axis; }
@@ -483,7 +479,7 @@ button.host_event_preview, button.host_event_save, button.host_event_cancel{ fle
 .photo_slide_select>div{ width: 90vmin; height: 70vmin; background-position: center; background-size: contain; background-repeat: no-repeat; }
 .photo_slides img{ width: 30vw; height: 30vw; padding: 0 1vmin; }
 .photo_slides>div{ width: 30vmin; height: 30vmin; background-position: center; background-size: cover; }
-.photo_slide_close{ width: 10vmin; float: right; position:absolute; top: 0; right: 0; }
+.photo_slide_close{ width: 10vmin; float: right; position:absolute; top: 0; }
 
 /* 대리운전 통계 */
 .call_month{ font-size: 1.3rem; display: flex; align-items: center; padding: 2vmin 4vmin 8vmin 4vmin; }
