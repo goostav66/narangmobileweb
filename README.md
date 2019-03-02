@@ -20,4 +20,6 @@
 [샘플 페이지]
 http://hanjicds001.gabia.io/index.jsp?p=djs1a0122
 
-
+[작업툴, 언어] 
+IDE : Eclipse
+SKILL : JSP, HTML, CSS, Javascript(jQuery&AJAX), MySQL
