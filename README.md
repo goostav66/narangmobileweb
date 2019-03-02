@@ -17,9 +17,9 @@
 6. 공유하기 : 해당 업소에 대한 링크를 문자메시지, 카카오톡, 페이스북으로 공유할 수 있습니다.
 
 
-[샘플 페이지]
+[샘플 페이지] <br>
 http://hanjicds001.gabia.io/index.jsp?p=djs1a0122
 
-[작업툴, 언어] 
-IDE : Eclipse
+[작업툴, 언어] <br>
+IDE : Eclipse <br>
 SKILL : JSP, HTML, CSS, Javascript(jQuery&AJAX), MySQL
