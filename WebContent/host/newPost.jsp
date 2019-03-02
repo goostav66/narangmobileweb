@@ -5,7 +5,7 @@
 <%
 	String url = request.getParameter("p");
 	
-	if(session.getAttribute("HOST")==null) response.sendRedirect("host_board.jsp?p="+url);
+	if(session.getAttribute("HOST")==null && !session.getAttribute("HOST").equals("bshwc16")) response.sendRedirect("host_board.jsp?p="+url);
 	
 	String sIdx = request.getParameter("idx");//글 수정일때
 	int idx = 0;
@@ -24,13 +24,14 @@
 <body>
 <form method="post" action="insertPost.jsp?p=<%=url%>" >
 	<div class="post_btn">
-		<span class="host_board_reg" style="float:left" onclick="window.history.back()">취소</span>
+		<img class="host_board_reg" style="float:left" src="../images/icon_common/icon_arrow_right.png" onclick="window.history.back()">
 		<span class="host_board_reg" style="float:right" id="sub">등록</span>
 	</div>
 
 	<div id="editor"><%if(idx!=0){%><%=bBean.getContent()%><%}%></div>
 	<input type="hidden" id="content" name="content">
 	<%if(idx!=0){%><input type="hidden" name="idx" value=<%=bBean.getIdx()%>><%} %>
+	
 </form>
 </body>
 
